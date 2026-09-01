@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>File spec — Sovereign Quant</title>
+  <link rel="canonical" href="https://sovereignquant.com.au/work.html" />
+  <style>
+    body { margin:0; background:#070806; color:#f3efe3; font-family:"Iowan Old Style", Georgia, serif; }
+    a { color:#ead7a8; }
+    .wrap { width: min(780px, calc(100% - 40px)); margin: 0 auto; padding: 48px 0 80px; }
+    .kicker { font-family: ui-sans-serif, system-ui, sans-serif; color:#c9a45c; letter-spacing:.2em; font-size:11px; text-transform:uppercase; }
+    h1 { font-size:42px; font-weight:500; }
+    p, li { color:#9b9686; line-height:1.55; }
+    code, pre { font-family: ui-monospace, Menlo, monospace; color:#ead7a8; font-size:13px; }
+    pre { background:#161910; border:1px solid #2c2f24; padding:16px; overflow:auto; }
+    .btn { display:inline-block; margin-top:8px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:11px; padding:12px 16px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p><a href="index.html">← Home</a></p>
+    <div class="kicker">What to send</div>
+    <h1>CSV we can read</h1>
+    <p>Email the file after Stripe payment to <code>reports@sovereignquant.com.au</code> (or the Gmail on your Stripe receipt if that mailbox is not live). Subject: your Stripe receipt number.</p>
+    <h2>Minimum columns</h2>
+    <pre>date,open,high,low,close
+2024-01-02,81.20,82.10,80.90,81.75</pre>
+    <ul>
+      <li>Optional: <code>volume</code>, <code>symbol</code></li>
+      <li>Fills file (separate): <code>datetime,side,qty,price</code></li>
+      <li>Date as ISO <code>YYYY-MM-DD</code> or a broker export we can map</li>
+      <li>One market per file. Three files for the A$799 pack</li>
+    </ul>
+    <h2>Do not send</h2>
+    <ul>
+      <li>Passwords, 2FA codes, API secrets</li>
+      <li>Screenshots of a platform instead of a file</li>
+      <li>A request for what to buy tomorrow</li>
+    </ul>
+    <p><a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Pay A$799 pack</a></p>
+  </div>
+</body>
+</html>

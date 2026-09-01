@@ -1,15 +1,19 @@
-# After a Stripe payment
+# Operator checklist after Stripe
+
+Create Titan mailbox reports@sovereignquant.com.au if it does not exist.
+
+## A$799 walk-forward pack
+1. Confirm payment.
+2. Collect three CSVs.
+3. Run walk-forward locally. Do not invent bars.
+4. Email three HTML reports. No buy/sell list.
+5. Unreadable file: refund that unit or re-request.
+
+## A$199 single tearsheet
+Same as one unit of the pack.
 
 ## A$29 PDF
-If Stripe file download is already attached to the product, do nothing.
-
-## A$199 tearsheet
-1. Confirm payment in Stripe dashboard.
-2. Ask for CSV: date, OHLC, optional volume or fills.
-3. Run the local reporting / backtest on that file only.
-4. Email the HTML. Do not give buy/sell instructions.
+Attach on Stripe or email Vol. I.
 
 ## US$499 Professional
-1. Confirm payment.
-2. Generate a named Professional key with `generate_licence.py` (keep the script private).
-3. Send zip + key. Change SOVEREIGN_LICENCE_SECRET first if you have not.
+Generate a named key with the private signing tool. Never commit the secret.
