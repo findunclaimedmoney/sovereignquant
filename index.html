@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sovereign Quant — CSV tearsheet &amp; offline research licence</title>
+  <meta name="description" content="Send a CSV. Get a branded research tearsheet. Or licence the offline workstation. No custody. No live client orders. Not financial advice." />
+  <link rel="canonical" href="https://sovereignquant.com.au/" />
+  <style>
+    :root { --bg:#0b0c0a; --panel:#141510; --line:#2a2c24; --gold:#c4a35a; --gold2:#e8d5a3; --ink:#ece8dc; --muted:#9a9586; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; background:var(--bg); color:var(--ink); font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; }
+    a { color:var(--gold2); }
+    header { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; padding:16px 7vw; background:rgba(11,12,10,.92); border-bottom:1px solid var(--line); }
+    .brand { letter-spacing:.18em; font-size:12px; font-family:ui-sans-serif,system-ui,sans-serif; }
+    nav a { margin-left:22px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+    .btn { display:inline-block; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 22px; border:1px solid var(--gold); color:var(--bg); background:var(--gold); }
+    .btn.ghost { background:transparent; color:var(--gold2); }
+    .hero { padding:11vh 7vw 7vh; max-width:1100px; }
+    .eyebrow { font-family:ui-sans-serif,system-ui,sans-serif; color:var(--gold); letter-spacing:.22em; font-size:11px; text-transform:uppercase; }
+    h1 { font-size:clamp(40px,7.4vw,84px); line-height:.92; font-weight:500; margin:16px 0 22px; }
+    .lede { max-width:640px; font-size:19px; color:var(--muted); line-height:1.45; }
+    .actions { margin-top:32px; display:flex; gap:12px; flex-wrap:wrap; }
+    .strip { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .strip div { padding:20px 7vw 20px 28px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--muted); border-right:1px solid var(--line); }
+    .strip strong { display:block; color:var(--ink); margin-bottom:6px; }
+    section { padding:72px 7vw; }
+    h2 { font-size:34px; font-weight:500; margin:0 0 14px; }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; }
+    .card { background:var(--panel); border:1px solid var(--line); padding:26px; }
+    .card.featured { border-color:var(--gold); }
+    .card h3 { margin:0 0 8px; font-size:22px; font-weight:500; }
+    .price { font-family:ui-sans-serif,system-ui,sans-serif; font-size:32px; color:var(--gold2); margin:10px 0 14px; }
+    .price span { font-size:13px; color:var(--muted); }
+    ul { color:var(--muted); line-height:1.55; }
+    .note { font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--muted); }
+    footer { padding:36px 7vw 64px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; font-family:ui-sans-serif,system-ui,sans-serif; }
+    .ok { background:#1a2418; border:1px solid #3a5a34; padding:14px 18px; margin:18px 7vw 0; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; display:none; }
+    @media (max-width:860px){ .strip,.grid3{grid-template-columns:1fr;} nav{display:none;} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">SOVEREIGN / QUANT</div>
+    <nav>
+      <a href="#buy">Buy</a>
+      <a href="#how">How it works</a>
+      <a href="#legal">Legal</a>
+    </nav>
+    <a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Buy tearsheet</a>
+  </header>
+  <div class="ok" id="paid">Payment received. Email your CSV to the address on your Stripe receipt. Research report only.</div>
+  <div class="hero">
+    <div class="eyebrow">Live Stripe checkout · Australia</div>
+    <h1>Send the CSV.<br>Buy the report.</h1>
+    <p class="lede">The website was a free download nobody paid for. The product people can use without installing Python is a branded research tearsheet from their own file. Checkout is live on Stripe. No custody. No live orders on your behalf.</p>
+    <div class="actions">
+      <a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">CSV tearsheet — A$199</a>
+      <a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Vol. 1 doctrine PDF — A$29</a>
+    </div>
+  </div>
+  <div class="strip">
+    <div><strong>What you pay for</strong>A report, a PDF, or a yearly software licence.</div>
+    <div><strong>What you do not pay for</strong>Signals, account management, or a share of trades.</div>
+    <div><strong>After pay</strong>Stripe emails a receipt. You send the file. We return HTML.</div>
+  </div>
+  <section id="how">
+    <h2>How a tearsheet works</h2>
+    <ol class="lede" style="padding-left:22px;">
+      <li>Pay A$199 on Stripe.</li>
+      <li>Email a broker export or OHLCV CSV (date, open, high, low, close, optional volume or fills).</li>
+      <li>You get a branded HTML report: equity path, drawdown, basic risk stats. Research only.</li>
+    </ol>
+  </section>
+  <section id="buy">
+    <h2>Live prices</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="eyebrow">Read</div>
+        <h3>Black &amp; Gold Vol. 1</h3>
+        <div class="price">A$29 <span>once</span></div>
+        <ul><li>Illustrated doctrine PDF</li><li>Instant Stripe fulfilment if configured</li><li>Not a trading signal</li></ul>
+        <p><a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Pay A$29</a></p>
+      </div>
+      <div class="card featured">
+        <div class="eyebrow">Service</div>
+        <h3>CSV tearsheet</h3>
+        <div class="price">A$199 <span>per report</span></div>
+        <ul><li>You supply the file</li><li>Branded research HTML</li><li>No advice, no live routing</li></ul>
+        <p><a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Pay A$199</a></p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Software</div>
+        <h3>Professional licence</h3>
+        <div class="price">US$499 <span>/ year</span></div>
+        <ul><li>Existing Stripe annual price</li><li>Offline workstation key after payment</li><li>You still generate the HMAC key yourself</li></ul>
+        <p><a class="btn ghost" href="https://buy.stripe.com/14A8wPdZI7u86tW18Ues003">Pay US$499 / yr</a></p>
+      </div>
+    </div>
+  </section>
+  <section id="legal">
+    <h2>Legal</h2>
+    <p class="note">Sovereign Quant is research and education software and reporting. It is not financial product advice. Simulated or historical figures are not a forecast. Trading can lose money. We do not hold client funds and we do not place live orders for customers. ABN / business name as registered to the Stripe account SOVEREIGN. QUANT.</p>
+  </section>
+  <footer>
+    © 2026 Sovereign Quant ·
+    <a href="https://github.com/jmorganegypt-source/sovereignquant">Source</a>
+  </footer>
+  <script>if (/paid=/.test(location.search)) document.getElementById('paid').style.display = 'block';</script>
+</body>
+</html>
