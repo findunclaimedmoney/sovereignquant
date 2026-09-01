@@ -3,122 +3,188 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sovereign Quant — walk-forward pack & CSV tearsheet</title>
-  <meta name="description" content="Buy a walk-forward robustness pack or a single CSV tearsheet. Research reports only. No custody. No live orders." />
+  <title>Sovereign Quant — robustness reports for your own market data</title>
+  <meta name="description" content="Pay for a walk-forward pack or a single tearsheet built from your CSV. Research reports only. No custody. No live orders. Australia." />
   <link rel="canonical" href="https://sovereignquant.com.au/" />
   <style>
-    :root { --bg:#0b0c0a; --panel:#141510; --line:#2a2c24; --gold:#c4a35a; --gold2:#e8d5a3; --ink:#ece8dc; --muted:#9a9586; }
+    :root { --bg:#070806; --bg2:#10120d; --panel:#161910; --line:#2c2f24; --gold:#c9a45c; --gold2:#ead7a8; --ink:#f3efe3; --muted:#9b9686; --bad:#b4554a; }
     * { box-sizing: border-box; }
-    html, body { margin:0; background:var(--bg); color:var(--ink); font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; }
     a { color:var(--gold2); }
-    header { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; padding:16px 7vw; background:rgba(11,12,10,.92); border-bottom:1px solid var(--line); }
-    .brand { letter-spacing:.18em; font-size:12px; font-family:ui-sans-serif,system-ui,sans-serif; }
-    nav a { margin-left:22px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
-    .btn { display:inline-block; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 22px; border:1px solid var(--gold); color:var(--bg); background:var(--gold); }
+    .wrap { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
+    header { position:sticky; top:0; z-index:30; backdrop-filter:blur(16px); background:rgba(7,8,6,.86); border-bottom:1px solid var(--line); }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px; }
+    .brand { font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.22em; font-size:11px; }
+    .brand b { color:var(--gold); }
+    .nav a.l { margin-left:18px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+    .btn { display:inline-block; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:11px; padding:13px 18px; border:1px solid var(--gold); color:var(--bg); background:var(--gold); }
     .btn.ghost { background:transparent; color:var(--gold2); }
-    .hero { padding:11vh 7vw 7vh; max-width:1100px; }
-    .eyebrow { font-family:ui-sans-serif,system-ui,sans-serif; color:var(--gold); letter-spacing:.22em; font-size:11px; text-transform:uppercase; }
-    h1 { font-size:clamp(40px,7.4vw,84px); line-height:.92; font-weight:500; margin:16px 0 22px; }
-    .lede { max-width:640px; font-size:19px; color:var(--muted); line-height:1.45; }
-    .actions { margin-top:32px; display:flex; gap:12px; flex-wrap:wrap; }
-    .strip { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .strip div { padding:20px 7vw 20px 28px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--muted); border-right:1px solid var(--line); }
-    .strip strong { display:block; color:var(--ink); margin-bottom:6px; }
-    section { padding:72px 7vw; }
-    h2 { font-size:34px; font-weight:500; margin:0 0 14px; }
-    .grid3 { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:32px; }
-    .card { background:var(--panel); border:1px solid var(--line); padding:26px; }
-    .card.featured { border-color:var(--gold); }
-    .card h3 { margin:0 0 8px; font-size:22px; font-weight:500; }
-    .price { font-family:ui-sans-serif,system-ui,sans-serif; font-size:32px; color:var(--gold2); margin:10px 0 14px; }
-    .price span { font-size:13px; color:var(--muted); }
-    ul { color:var(--muted); line-height:1.55; }
-    .note { font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--muted); }
-    footer { padding:36px 7vw 64px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; font-family:ui-sans-serif,system-ui,sans-serif; }
-    .ok { background:#1a2418; border:1px solid #3a5a34; padding:14px 18px; margin:18px 7vw 0; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; display:none; }
-    @media (max-width:860px){ .strip,.grid3{grid-template-columns:1fr;} nav{display:none;} }
+    .hero { display:grid; grid-template-columns:1.15fr .85fr; gap:48px; padding:72px 0 56px; align-items:end; }
+    .kicker { font-family:ui-sans-serif,system-ui,sans-serif; color:var(--gold); letter-spacing:.24em; font-size:11px; text-transform:uppercase; }
+    h1 { font-size:clamp(42px,6.4vw,78px); line-height:.9; font-weight:500; margin:14px 0 18px; }
+    .lede { font-size:19px; color:var(--muted); line-height:1.5; max-width:560px; }
+    .actions { margin-top:28px; display:flex; gap:10px; flex-wrap:wrap; }
+    .panel { background:linear-gradient(180deg,rgba(201,164,92,.08),transparent 30%),var(--panel); border:1px solid var(--line); padding:22px; }
+    .panel h2 { margin:0 0 14px; font-size:18px; font-weight:500; }
+    .stat { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; }
+    .stat span { color:var(--muted); }
+    .mock { margin-top:16px; height:120px; border:1px solid var(--line); background:linear-gradient(180deg,#1b2116,#0c0e0a); }
+    .mock svg { width:100%; height:100%; display:block; }
+    .strip { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .strip div { padding:22px 18px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--muted); border-right:1px solid var(--line); }
+    .strip strong { display:block; color:var(--ink); margin-bottom:6px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+    section { padding:72px 0; }
+    h2 { font-size:34px; font-weight:500; margin:0 0 12px; }
+    .sub { color:var(--muted); max-width:640px; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:28px; }
+    .step { background:var(--bg2); border:1px solid var(--line); padding:20px; min-height:170px; }
+    .n { font-family:ui-sans-serif,system-ui,sans-serif; color:var(--gold); font-size:11px; letter-spacing:.16em; }
+    .step h3 { margin:10px 0 8px; font-size:18px; font-weight:500; }
+    .step p { margin:0; color:var(--muted); font-size:15px; line-height:1.45; }
+    .grid { display:grid; grid-template-columns:1.2fr .8fr; gap:18px; margin-top:28px; }
+    .cards { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .card { background:var(--panel); border:1px solid var(--line); padding:22px; display:flex; flex-direction:column; }
+    .card.feat { border-color:var(--gold); }
+    .card h3 { margin:8px 0; font-size:22px; font-weight:500; }
+    .price { font-family:ui-sans-serif,system-ui,sans-serif; font-size:30px; color:var(--gold2); margin:4px 0 12px; }
+    .price em { font-style:normal; font-size:12px; color:var(--muted); }
+    .card ul { margin:0 0 18px; padding-left:18px; color:var(--muted); line-height:1.55; flex:1; }
+    details { border-top:1px solid var(--line); padding:14px 0; }
+    details summary { cursor:pointer; font-family:ui-sans-serif,system-ui,sans-serif; }
+    details p { color:var(--muted); margin:10px 0 0; }
+    footer { padding:28px 0 56px; border-top:1px solid var(--line); color:var(--muted); font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .okbar { display:none; margin:16px auto 0; width:min(1180px,calc(100% - 40px)); background:#162016; border:1px solid #355035; padding:12px 16px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; }
+    code { font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--gold2); }
+    @media (max-width:900px){ .hero,.grid,.steps,.strip,.cards{grid-template-columns:1fr;} .nav .hide{display:none;} }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">SOVEREIGN / QUANT</div>
-    <nav>
-      <a href="#buy">Buy</a>
-      <a href="#how">How it works</a>
-      <a href="#legal">Legal</a>
-    </nav>
-    <a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Buy pack A$799</a>
-  </header>
-  <div class="ok" id="paid">Payment received. Email your CSVs to the address on the Stripe receipt. Research reports only.</div>
-  <div class="hero">
-    <div class="eyebrow">New line · Live Stripe · Australia</div>
-    <h1>Walk-forward pack.<br>Three reports. A$799.</h1>
-    <p class="lede">This is the product a desk actually buys: robustness reports on their own files, not a free Python zip. You send three CSVs. You get three branded walk-forward HTML reports. Research only. No custody. No live orders.</p>
-    <div class="actions">
-      <a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Walk-forward pack — A$799</a>
-      <a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Single tearsheet — A$199</a>
-      <a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Vol. 1 PDF — A$29</a>
+    <div class="wrap nav">
+      <div class="brand">SOVEREIGN <b>/</b> QUANT</div>
+      <div>
+        <a class="l hide" href="#need">The need</a>
+        <a class="l hide" href="#pack">The pack</a>
+        <a class="l hide" href="#buy">Prices</a>
+        <a class="l hide" href="work.html">File spec</a>
+        <a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Pay A$799</a>
+      </div>
     </div>
+  </header>
+  <div class="okbar" id="paid">Payment received. Email CSVs to <b>reports@sovereignquant.com.au</b> with the Stripe receipt.</div>
+  <div class="wrap hero">
+    <div>
+      <div class="kicker">Research desk · Australia · live checkout</div>
+      <h1>Your file in.<br>A robustness report out.</h1>
+      <p class="lede">Most people with a backtest have one lucky curve. The service they pay for is a walk-forward on <em>their</em> data. We do not hold money and we do not place trades.</p>
+      <div class="actions">
+        <a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Walk-forward pack — A$799</a>
+        <a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">One tearsheet — A$199</a>
+        <a class="btn ghost" href="work.html">What to send →</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <h2>Sample artefact (illustrative)</h2>
+      <div class="stat"><span>Window</span><b>IS 70% / OOS 30%</b></div>
+      <div class="stat"><span>Max drawdown</span><b>from your file</b></div>
+      <div class="stat"><span>Trades / year</span><b>counted, not guessed</b></div>
+      <div class="stat"><span>Advice</span><b style="color:var(--bad)">none</b></div>
+      <div class="mock" aria-hidden="true">
+        <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+          <polyline fill="none" stroke="#c9a45c" stroke-width="2" points="0,90 20,86 40,88 60,70 80,74 100,58 120,62 140,44 160,50 180,38 200,42 220,30 240,36 260,28 280,22 300,26" />
+        </svg>
+      </div>
+    </aside>
   </div>
   <div class="strip">
-    <div><strong>What they pay for</strong>A robustness pack, one report, a PDF, or a yearly licence.</div>
-    <div><strong>What they do not pay for</strong>Signals, account management, or a share of trades.</div>
-    <div><strong>After pay</strong>Stripe receipt. They email files. You return HTML.</div>
+    <div><strong>Buy</strong>A pack, one report, a book, or a yearly licence.</div>
+    <div><strong>Do not buy</strong>Signals, account control, or a cut of trades.</div>
+    <div><strong>Send</strong>Broker or OHLCV CSV.</div>
+    <div><strong>Receive</strong>Branded HTML. Research only.</div>
   </div>
-  <section id="how">
-    <h2>What the pack is</h2>
-    <ol class="lede" style="padding-left:22px;">
-      <li>Customer pays A$799.</li>
-      <li>They email three broker or OHLCV CSVs (date, open, high, low, close).</li>
-      <li>You return three branded walk-forward HTML reports: in-sample / out-of-sample split, equity, drawdown, basic risk stats.</li>
-      <li>Research artefact only. Not advice. Not a live order.</li>
-    </ol>
+  <section class="wrap" id="need">
+    <div class="kicker">Why this exists</div>
+    <h2>The gap on the old site</h2>
+    <p class="sub">The workstation was a free download. Nobody paid. People who will pay already have a CSV. They need a walk-forward they can read without installing Python and without an API key.</p>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>They have data</h3><p>CommSec, IG, Interactive Brokers, or plain OHLCV.</p></div>
+      <div class="step"><div class="n">02</div><h3>They distrust one curve</h3><p>A single backtest overfits. Walk-forward is the work they will not set up.</p></div>
+      <div class="step"><div class="n">03</div><h3>They pay</h3><p>Stripe. Receipt in the inbox. No account on this site.</p></div>
+      <div class="step"><div class="n">04</div><h3>They get HTML</h3><p>Equity, drawdown, split stats. No live ticket.</p></div>
+    </div>
   </section>
-  <section id="buy">
-    <h2>Live prices</h2>
-    <div class="grid3">
-      <div class="card featured">
-        <div class="eyebrow">New · Service</div>
-        <h3>Walk-forward pack</h3>
-        <div class="price">A$799 <span>three reports</span></div>
-        <ul>
-          <li>Three customer CSVs</li>
-          <li>Three branded walk-forward HTML reports</li>
-          <li>The line a self-directed desk actually needs</li>
-        </ul>
-        <p><a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Pay A$799</a></p>
+  <section class="wrap" id="pack">
+    <div class="kicker">The product a desk needs</div>
+    <h2>Walk-forward pack — three files</h2>
+    <p class="sub">A$799 is three separate robustness reports. Three markets, three windows, or three versions of the same idea.</p>
+    <div class="grid">
+      <div class="panel">
+        <h2>Inside each report</h2>
+        <div class="stat"><span>In-sample / out-of-sample</span><b>Yes</b></div>
+        <div class="stat"><span>Equity + underwater</span><b>Yes</b></div>
+        <div class="stat"><span>Trade stats</span><b>If fills exist</b></div>
+        <div class="stat"><span>Buy / sell list</span><b>Never</b></div>
+        <div class="stat"><span>API keys / custody</span><b>Never</b></div>
       </div>
-      <div class="card">
-        <div class="eyebrow">Service</div>
-        <h3>CSV tearsheet</h3>
-        <div class="price">A$199 <span>one report</span></div>
-        <ul><li>One file in</li><li>One branded HTML out</li><li>No live routing</li></ul>
-        <p><a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Pay A$199</a></p>
-      </div>
-      <div class="card">
-        <div class="eyebrow">Read</div>
-        <h3>Black & Gold Vol. 1</h3>
-        <div class="price">A$29 <span>once</span></div>
-        <ul><li>Doctrine PDF</li><li>Not a trading signal</li></ul>
-        <p><a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Pay A$29</a></p>
-      </div>
-      <div class="card">
-        <div class="eyebrow">Software</div>
-        <h3>Professional licence</h3>
-        <div class="price">US$499 <span>/ year</span></div>
-        <ul><li>Offline workstation key after payment</li><li>You still issue the signed key</li></ul>
-        <p><a class="btn ghost" href="https://buy.stripe.com/14A8wPdZI7u86tW18Ues003">Pay US$499 / yr</a></p>
+      <div class="panel">
+        <h2>Turnaround</h2>
+        <p class="sub">Target two business days after a usable CSV arrives at <code>reports@sovereignquant.com.au</code>. Create that Titan mailbox if needed.</p>
+        <p><a class="btn ghost" href="work.html" style="margin-top:16px">CSV columns</a></p>
       </div>
     </div>
   </section>
-  <section id="legal">
-    <h2>Legal</h2>
-    <p class="note">Sovereign Quant is research and education software and reporting. It is not financial product advice. Simulated or historical figures are not a forecast. Trading can lose money. We do not hold client funds and we do not place live orders for customers. ABN / business name as registered to the Stripe account SOVEREIGN. QUANT.</p>
+  <section class="wrap" id="buy">
+    <div class="kicker">Live Stripe</div>
+    <h2>Prices</h2>
+    <div class="cards" style="margin-top:28px">
+      <div class="card feat">
+        <div class="kicker">Primary</div>
+        <h3>Walk-forward pack</h3>
+        <div class="price">A$799 <em>three reports</em></div>
+        <ul><li>Three CSVs, three HTML reports</li><li>Same legal limits as a single report</li></ul>
+        <a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Pay A$799</a>
+      </div>
+      <div class="card">
+        <div class="kicker">Single</div>
+        <h3>CSV tearsheet</h3>
+        <div class="price">A$199 <em>one report</em></div>
+        <ul><li>One file in, one HTML out</li></ul>
+        <a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Pay A$199</a>
+      </div>
+      <div class="card">
+        <div class="kicker">Read</div>
+        <h3>Black & Gold Vol. I</h3>
+        <div class="price">A$29 <em>PDF</em></div>
+        <ul><li>Doctrine, not a signal</li></ul>
+        <a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Pay A$29</a>
+      </div>
+      <div class="card">
+        <div class="kicker">Software</div>
+        <h3>Professional licence</h3>
+        <div class="price">US$499 <em>/ year</em></div>
+        <ul><li>Offline key after payment</li></ul>
+        <a class="btn ghost" href="https://buy.stripe.com/14A8wPdZI7u86tW18Ues003">Pay US$499 / yr</a>
+      </div>
+    </div>
   </section>
-  <footer>
-    © 2026 Sovereign Quant ·
-    <a href="https://github.com/jmorganegypt-source/sovereignquant">Source</a>
+  <section class="wrap" id="faq">
+    <div class="kicker">Straight answers</div>
+    <h2>FAQ</h2>
+    <details open><summary>Is this financial advice?</summary><p>No. Reports describe the file you sent.</p></details>
+    <details><summary>Do you trade my account?</summary><p>No. No broker login. No API key. No custody.</p></details>
+    <details><summary>What if my CSV is messy?</summary><p>We try once to map columns. If it cannot be read, that unit is refunded. We do not fabricate bars.</p></details>
+    <details><summary>Where does the money go?</summary><p>Stripe account SOVEREIGN. QUANT.</p></details>
+  </section>
+  <section class="wrap" id="legal">
+    <div class="kicker">Legal</div>
+    <h2>Limits</h2>
+    <p class="sub">Research reports, a doctrine PDF, and an offline licence. Not a forecast. Not AFSL advice. Trading can lose money.</p>
+  </section>
+  <footer class="wrap">
+    <div>© 2026 Sovereign Quant</div>
+    <div><a href="work.html">File spec</a> · <a href="after.html">After you pay</a></div>
   </footer>
-  <script>if (/paid=/.test(location.search)) document.getElementById('paid').style.display = 'block';</script>
+  <script>if (/paid=/.test(location.search)) document.getElementById('paid').style.display='block';</script>
 </body>
 </html>
