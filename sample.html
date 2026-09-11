@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sample report — Sovereign Quant</title>
+  <meta name="description" content="Hypothetical walk-forward sample. Not a live result. Not advice." />
+  <style>
+    :root { --bg:#0b0c09; --card:#14160f; --line:#2c2f24; --gold:#c9a45c; --gold2:#ead7a8; --ink:#f3efe3; --muted:#9b9686; --bad:#b4554a; --ok:#7a9a62; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:ui-sans-serif,system-ui,sans-serif; }
+    .page { width:min(920px, calc(100% - 32px)); margin:28px auto 64px; }
+    .banner { background:#3a201c; color:#f0d4d0; padding:10px 14px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:18px; }
+    header { display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding-bottom:16px; }
+    .brand { letter-spacing:.2em; font-size:11px; }
+    .brand b { color:var(--gold); }
+    .meta { text-align:right; color:var(--muted); font-size:12px; }
+    h1 { font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:32px; font-weight:500; margin:18px 0 6px; }
+    .sub { color:var(--muted); margin:0 0 24px; }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0; }
+    .stat { background:var(--card); border:1px solid var(--line); padding:14px; }
+    .stat span { display:block; color:var(--muted); font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px; }
+    .stat b { font-size:20px; font-weight:500; }
+    .neg { color:var(--bad); }
+    .pos { color:var(--ok); }
+    .panel { background:var(--card); border:1px solid var(--line); padding:16px; margin:16px 0; }
+    h2 { font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:18px; font-weight:500; margin:0 0 12px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); }
+    th { color:var(--muted); font-weight:500; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    svg { width:100%; height:160px; display:block; background:#0c0e0a; }
+    footer { color:var(--muted); font-size:12px; line-height:1.5; margin-top:28px; }
+    a { color:var(--gold2); }
+    @media (max-width:700px){ .grid,.split{grid-template-columns:1fr 1fr;} header{flex-direction:column;} .meta{text-align:left;} }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="banner">Hypothetical sample — public-style demo file — not your account — not a forecast — not advice</div>
+    <header>
+      <div>
+        <div class="brand">SOVEREIGN <b>/</b> QUANT</div>
+        <div style="color:var(--muted);font-size:12px;margin-top:6px">Walk-forward robustness report</div>
+      </div>
+      <div class="meta">
+        Job SQ-SAMPLE-001<br />
+        Market: DEMO-XAO daily<br />
+        Prepared: 11 Sep 2026<br />
+        Window: IS 70% / OOS 30%
+      </div>
+    </header>
+
+    <h1>Demo series, split in time</h1>
+    <p class="sub">This is what a paid HTML looks like. Figures below are invented for layout. They are not a live track record and must not be copied as performance.</p>
+
+    <div class="grid">
+      <div class="stat"><span>IS return</span><b class="pos">+12.4%</b></div>
+      <div class="stat"><span>OOS return</span><b class="neg">−3.1%</b></div>
+      <div class="stat"><span>Max DD (full)</span><b class="neg">−9.8%</b></div>
+      <div class="stat"><span>Trades counted</span><b>84</b></div>
+    </div>
+
+    <div class="panel">
+      <h2>Equity (indexed to 100 at start)</h2>
+      <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Sample equity curve">
+        <line x1="420" y1="10" x2="420" y2="150" stroke="#c9a45c" stroke-dasharray="4 4" stroke-width="1" opacity="0.6"/>
+        <text x="428" y="22" fill="#ead7a8" font-size="10" font-family="system-ui">OOS →</text>
+        <polyline fill="none" stroke="#c9a45c" stroke-width="2"
+          points="0,120 40,118 80,110 120,112 160,96 200,90 240,92 280,78 320,70 360,74 400,62 420,64 460,78 500,82 540,88 580,84 600,90" />
+      </svg>
+    </div>
+
+    <div class="panel">
+      <h2>Underwater</h2>
+      <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Sample drawdown">
+        <polyline fill="#3a201c" stroke="#b4554a" stroke-width="1.5"
+          points="0,20 40,28 80,22 120,40 160,36 200,55 240,48 280,30 320,44 360,70 400,50 440,88 480,92 520,60 560,72 600,58 600,150 0,150" />
+      </svg>
+    </div>
+
+    <div class="split">
+      <div class="panel">
+        <h2>In-sample</h2>
+        <table>
+          <tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Bars</td><td>1,764</td></tr>
+          <tr><td>Return</td><td class="pos">+12.4%</td></tr>
+          <tr><td>Max DD</td><td class="neg">−7.2%</td></tr>
+          <tr><td>Trades</td><td>61</td></tr>
+          <tr><td>Hit rate</td><td>53%</td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>Out-of-sample</h2>
+        <table>
+          <tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Bars</td><td>756</td></tr>
+          <tr><td>Return</td><td class="neg">−3.1%</td></tr>
+          <tr><td>Max DD</td><td class="neg">−9.8%</td></tr>
+          <tr><td>Trades</td><td>23</td></tr>
+          <tr><td>Hit rate</td><td>48%</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>What this file did not include</h2>
+      <table>
+        <tr><th>Item</th><th>On this sample</th></tr>
+        <tr><td>Fills / trade list</td><td>Demo counts only — no ticket tape</td></tr>
+        <tr><td>Buy / sell list for next week</td><td>Never delivered</td></tr>
+        <tr><td>Broker login</td><td>Not used</td></tr>
+        <tr><td>Advice</td><td>None</td></tr>
+      </table>
+    </div>
+
+    <footer>
+      Sovereign Quant sample artefact SQ-SAMPLE-001. Research layout only.
+      A paid job uses <em>your</em> CSV; numbers will differ and may be worse.
+      Not financial product advice. Trading can lose money.
+      <br /><br />
+      <a href="/">Home</a> · <a href="/work.html">File spec</a> · <a href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Order one report — A$199</a>
+    </footer>
+  </div>
+</body>
+</html>
 
