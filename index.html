@@ -50,6 +50,8 @@
     .price { font-family:ui-sans-serif,system-ui,sans-serif; font-size:30px; color:var(--gold2); margin:4px 0 12px; }
     .price em { font-style:normal; font-size:12px; color:var(--muted); }
     .card ul { margin:0 0 18px; padding-left:18px; color:var(--muted); line-height:1.55; flex:1; }
+    .booklinks { margin:12px 0 0; font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; letter-spacing:.06em; }
+    .booklinks a { margin-right:14px; }
     details { border-top:1px solid var(--line); padding:14px 0; }
     details summary { cursor:pointer; font-family:ui-sans-serif,system-ui,sans-serif; }
     details p { color:var(--muted); margin:10px 0 0; }
@@ -67,6 +69,7 @@
         <a class="l hide" href="#need">The need</a>
         <a class="l hide" href="#pack">The pack</a>
         <a class="l hide" href="#buy">Prices</a>
+        <a class="l hide" href="#books">Books</a>
         <a class="l hide" href="work.html">File spec</a>
         <a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Pay A$799</a>
       </div>
@@ -152,12 +155,20 @@
         <ul><li>One file in, one HTML out</li></ul>
         <a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Pay A$199</a>
       </div>
-      <div class="card">
+      <div class="card" id="books">
         <div class="kicker">Read</div>
-        <h3>Black & Gold Vol. I</h3>
-        <div class="price">A$29 <em>PDF</em></div>
-        <ul><li>Doctrine, not a signal</li></ul>
-        <a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Pay A$29</a>
+        <h3>Black &amp; Gold volumes</h3>
+        <div class="price">A$29 <em>Vol. I on Stripe</em></div>
+        <ul>
+          <li>Volume I — Sovereignty (doctrine PDF)</li>
+          <li>Volume II — Architecture (blueprint PDF)</li>
+          <li>Software licensing / research text. Not a signal.</li>
+        </ul>
+        <a class="btn ghost" href="https://buy.stripe.com/3cIcN5dZIg0EdWog3Oes001">Pay A$29 — Vol. I</a>
+        <p class="booklinks">
+          <a href="/book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf">Volume I — PDF</a>
+          <a href="/book/Sovereign_Quant_Volume_II_Architecture.pdf">Volume II — PDF</a>
+        </p>
       </div>
       <div class="card">
         <div class="kicker">Software</div>
@@ -183,7 +194,12 @@
   </section>
   <footer class="wrap">
     <div>© 2026 Sovereign Quant</div>
-    <div><a href="work.html">File spec</a> · <a href="after.html">After you pay</a></div>
+    <div>
+      <a href="work.html">File spec</a>
+      · <a href="after.html">After you pay</a>
+      · <a href="/book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf">Vol. I</a>
+      · <a href="/book/Sovereign_Quant_Volume_II_Architecture.pdf">Vol. II</a>
+    </div>
   </footer>
   <script>if (/paid=/.test(location.search)) document.getElementById('paid').style.display='block';</script>
 </body>
