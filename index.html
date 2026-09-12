@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sovereign Quant — see the walk-forward before you pay</title>
-  <meta name="description" content="Free sample walk-forward on public data. Your CSV: A$199 for one HTML report. No broker login. No signals. Australia." />
+  <title>Sovereign Quant — prove the backtest on unseen data</title>
+  <meta name="description" content="Your backtest is one curve. Split it. Free sample walk-forward, then A$199 for one HTML robustness report on your CSV. No broker login. Australia." />
   <link rel="canonical" href="https://sovereignquant.com.au/" />
-  <meta property="og:title" content="Your backtest is one curve. See the other side." />
-  <meta property="og:description" content="Free sample report. Then send your own CSV. Research only — we do not trade your account." />
+  <meta property="og:title" content="Prove your backtest. Split the curve." />
+  <meta property="og:description" content="Does the strategy survive unseen data? Open the sample, then send your CSV. Research only." />
   <meta property="og:url" content="https://sovereignquant.com.au/" />
   <meta property="og:type" content="website" />
   <style>
@@ -54,6 +54,11 @@
     .status-box { margin-top:14px; border:1px solid var(--line); padding:14px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; }
     .status-box.ok { border-color:#3d5a32; background:#12160f; }
     .status-box.bad { border-color:var(--bad); background:#1a100e; color:var(--bad); }
+    .step { padding:28px 0; border-top:1px solid var(--line); }
+    .step:first-child { border-top:0; padding-top:0; }
+    .arrow { color:var(--gold); font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.3em; font-size:11px; margin:8px 0 0; }
+    .ladder { font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--muted); line-height:1.7; }
+    .ladder b { color:var(--gold2); font-weight:500; }
     @media (max-width:700px){ .grid{grid-template-columns:1fr 1fr;} header{flex-wrap:wrap;} }
   </style>
 </head>
@@ -67,105 +72,112 @@
     </nav>
   </header>
 
-  <div class="wrap" style="padding:48px 0 24px">
-    <div class="kicker">Free look · then your file</div>
-    <h1>Your backtest is one curve. See the split.</h1>
-    <p class="lede">
-      Open a sample walk-forward first. If that is the work you wanted,
-      send your own CSV. One HTML report. Two business days.
-      We do not hold funds and we do not place trades.
-    </p>
+  <div class="wrap" style="padding:48px 0 8px">
+    <div class="kicker">Prove your backtest</div>
+    <h1>Your backtest is one curve.</h1>
+    <p class="lede">Does the strategy actually survive unseen data? Split it. Then decide if you want that work on your own file.</p>
     <div class="actions">
       <a class="btn" href="sample.html">Open the sample</a>
-      <a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">My file — A$199</a>
+      <a class="btn ghost" href="#csv">Get the robustness report — A$199</a>
     </div>
-    <p class="fine">No account. Pay Stripe, email the CSV to reports@sovereignquant.com.au with the receipt.</p>
+    <p class="fine">No account. Research HTML only. We do not hold funds and we do not place trades.</p>
   </div>
+
+  <section class="wrap" style="border-top:0; padding-top:12px">
+    <div class="step">
+      <div class="kicker">Your backtest</div>
+      <h2>One equity curve.</h2>
+      <div class="panel">
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Single fitted equity curve">
+          <polyline fill="none" stroke="#c9a45c" stroke-width="2"
+            points="0,120 40,118 80,110 120,112 160,96 200,90 240,92 280,78 320,70 360,74 400,62 420,64 460,78 500,82 540,88 580,84 600,90" />
+        </svg>
+      </div>
+      <div class="arrow">↓</div>
+    </div>
+
+    <div class="step">
+      <div class="kicker">The question</div>
+      <h2>Does it survive unseen data?</h2>
+      <p class="lede">In-sample is the fitted story. Out-of-sample is the one that trades. Most lucky curves fail the split.</p>
+      <div class="arrow">↓</div>
+    </div>
+
+    <div class="step">
+      <div class="kicker">Sovereign Quant</div>
+      <h2>Split the curve.</h2>
+      <div class="grid">
+        <div class="stat"><span>IS return</span><b class="pos">+12.4%</b></div>
+        <div class="stat"><span>OOS return</span><b class="neg">−3.1%</b></div>
+        <div class="stat"><span>Max DD</span><b class="neg">−9.8%</b></div>
+        <div class="stat"><span>Trades</span><b>84</b></div>
+      </div>
+      <div class="panel">
+        <div class="kicker" style="margin-bottom:10px">Dashed line is the split · sample is hypothetical</div>
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Walk-forward split">
+          <line x1="420" y1="10" x2="420" y2="150" stroke="#c9a45c" stroke-dasharray="4 4" stroke-width="1" opacity="0.6"/>
+          <text x="428" y="22" fill="#ead7a8" font-size="10" font-family="system-ui">OOS →</text>
+          <polyline fill="none" stroke="#c9a45c" stroke-width="2"
+            points="0,120 40,118 80,110 120,112 160,96 200,90 240,92 280,78 320,70 360,74 400,62 420,64 460,78 500,82 540,88 580,84 600,90" />
+        </svg>
+      </div>
+      <p class="actions"><a class="btn ghost" href="sample.html">See the example report</a></p>
+      <div class="arrow">↓</div>
+    </div>
+
+    <div class="step" id="csv">
+      <div class="kicker">Your CSV</div>
+      <h2>We’ll show in-sample vs out-of-sample.</h2>
+      <p class="lede">Drop a CommSec, IG, IBKR, or plain OHLCV export. Mapping happens on this device. Nothing is uploaded. If the header reads, the report is A$199.</p>
+      <div data-csv-preflight>
+        <label class="drop">
+          <input type="file" accept=".csv,text/csv" />
+          Select broker CSV
+          <small>or drop it here · stays in the browser</small>
+        </label>
+        <div data-verdict hidden></div>
+      </div>
+      <div class="price">A$199 <em>one CSV → one HTML robustness report</em></div>
+      <p class="no">No signals · no API keys · no custody · not AFSL advice</p>
+      <div class="actions">
+        <a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Get your robustness report — A$199</a>
+        <a class="btn ghost" href="work.html">File spec</a>
+      </div>
+      <p class="fine">Pay Stripe, email the CSV to reports@sovereignquant.com.au with the receipt. Two business days. Unreadable file after one mapping attempt: that unit refunded. We do not invent bars.</p>
+    </div>
+  </section>
 
   <div class="wrap">
     <div class="vid" id="video">
       <video controls playsinline preload="metadata" poster="/video/poster.jpg">
         <source src="/video/sq-45.mp4" type="video/mp4" />
       </video>
-      <p>45 seconds. Silent captions. Not a track record. Face-on desk clip still belongs on your phone if you want that cut.</p>
+      <p>38 seconds. Your voice. The sample on the laptop. Not a track record.</p>
     </div>
   </div>
 
   <section class="wrap">
-    <div class="kicker">The artefact</div>
-    <h2>In-sample is the fitted story.</h2>
-    <p class="lede">Out-of-sample is the one that trades. The live sample is hypothetical layout on public-style data — including a negative OOS. That is the point.</p>
-    <div class="grid">
-      <div class="stat"><span>IS return</span><b class="pos">+12.4%</b></div>
-      <div class="stat"><span>OOS return</span><b class="neg">−3.1%</b></div>
-      <div class="stat"><span>Max DD</span><b class="neg">−9.8%</b></div>
-      <div class="stat"><span>Trades</span><b>84</b></div>
-    </div>
-    <div class="panel">
-      <div class="kicker" style="margin-bottom:10px">Equity · indexed to 100 · dashed line is the split</div>
-      <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Sample equity curve">
-        <line x1="420" y1="10" x2="420" y2="150" stroke="#c9a45c" stroke-dasharray="4 4" stroke-width="1" opacity="0.6"/>
-        <text x="428" y="22" fill="#ead7a8" font-size="10" font-family="system-ui">OOS →</text>
-        <polyline fill="none" stroke="#c9a45c" stroke-width="2"
-          points="0,120 40,118 80,110 120,112 160,96 200,90 240,92 280,78 320,70 360,74 400,62 420,64 460,78 500,82 540,88 580,84 600,90" />
-      </svg>
-    </div>
-    <p class="actions"><a class="btn ghost" href="sample.html">Full sample HTML</a></p>
-  </section>
-
-  <section class="wrap" id="preflight">
-    <div class="kicker">Before you pay</div>
-    <h2>Test the header. $0.</h2>
-    <p class="lede">Drop a CommSec, IG, IBKR, or plain OHLCV export. Mapping happens on this device. Nothing is uploaded. If it reads, the A$199 button is for you.</p>
-    <div data-csv-preflight>
-      <label class="drop">
-        <input type="file" accept=".csv,text/csv" />
-        Select broker CSV
-        <small>or drop it here · stays in the browser</small>
-      </label>
-      <div data-verdict hidden></div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div class="kicker">The free experience</div>
-    <h2>Not a free trade. A free read.</h2>
-    <p class="lede">
-      A free trade means touching an account. We will not.
-      What you can use today for $0:
-    </p>
-    <ol>
-      <li>Volume I and Volume II PDFs — what the desk believes.</li>
-      <li>File spec — what to export from CommSec, IG, or IBKR.</li>
-      <li>When you have it: a public-data sample HTML at /sample.</li>
-    </ol>
+    <div class="kicker">The free read</div>
+    <h2>Education first. Not a free trade.</h2>
+    <p class="lede">A free trade means touching an account. We will not. Volume I and II are the judgement behind the split — read them if you want the method, not a signal.</p>
     <p class="actions">
       <a class="btn ghost" href="/book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf">Vol. I PDF</a>
       <a class="btn ghost" href="/book/Sovereign_Quant_Volume_II_Architecture.pdf">Vol. II PDF</a>
-      <a class="btn ghost" href="work.html">What to send</a>
     </p>
   </section>
 
   <section class="wrap" id="buy">
-    <div class="kicker">When you want it on your data</div>
-    <h2>One market. A$199.</h2>
-    <div class="price">A$199 <em>one CSV → one HTML</em></div>
-    <p class="lede">In-sample / out-of-sample, equity, drawdown. Trade stats only if fills exist. No buy list.</p>
-    <p class="no">No signals · no API keys · no custody · not AFSL advice</p>
+    <div class="kicker">The ladder</div>
+    <h2>One market. Then three. Then the machine.</h2>
+    <p class="ladder">
+      <b>Free</b> — sample HTML + the books.<br />
+      <b>A$199</b> — one CSV, one robustness report.<br />
+      <b>A$799</b> — three markets, same artefact.<br />
+      <b>Workstation</b> — same judgement, offline, after the first paid report.
+    </p>
     <div class="actions">
-      <a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Pay A$199</a>
       <a class="btn ghost" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Three markets — A$799</a>
     </div>
-    <p class="fine">Unreadable file after one mapping attempt: that unit refunded. We do not invent bars.</p>
-  </section>
-
-  <section class="wrap">
-    <div class="kicker">The other door</div>
-    <h2>Want the machine on your PC?</h2>
-    <p class="lede">
-      Same judgement, offline. Ask after the first paid report if you want the yearly key.
-      Do not start there. Start with the free read and one file.
-    </p>
   </section>
 
   <footer class="wrap">
