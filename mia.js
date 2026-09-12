@@ -59,6 +59,8 @@
   function pageHint() {
     if (PAGE.indexOf("sample") !== -1)
       return "You are on the " + SAMPLE + ". Hypothetical. MIXED: IS +12.4%, OOS −3.1%. Not your account.";
+    if (PAGE.indexOf("books") !== -1)
+      return "Books page. Volume I and II are A$19.90 each — Stripe or Google Play. Doctrine, not a signal.";
     if (PAGE.indexOf("work") !== -1)
       return "This is the " + SPEC + ". Date + OHLCV, or fills. One market per file.";
     if (PAGE.indexOf("after") !== -1)

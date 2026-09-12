@@ -3,10 +3,13 @@ User-agent: *
 Allow: /
 Allow: /sample
 Allow: /sample.html
+Allow: /books.html
 Allow: /work.html
 Allow: /after.html
+Allow: /book/*.jpg
 
 Disallow: /video/
+Disallow: /book/*.pdf
 
 Sitemap: https://sovereignquant.com.au/sitemap.xml
 Sitemap: https://www.sovereignquant.com.au/sitemap.xml
