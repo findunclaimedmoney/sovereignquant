@@ -54,6 +54,12 @@
     .status-box { margin-top:14px; border:1px solid var(--line); padding:14px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; }
     .status-box.ok { border-color:#3d5a32; background:#12160f; }
     .status-box.bad { border-color:var(--bad); background:#1a100e; color:var(--bad); }
+    .checks { list-style:none; padding:10px 0 0; margin:0; font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; color:var(--ok); letter-spacing:.04em; }
+    .checks li { margin:5px 0; }
+    .status-box.bad .checks li { color:var(--bad); }
+    table.cmp { width:100%; border-collapse:collapse; font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; margin:16px 0; }
+    table.cmp th, table.cmp td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); }
+    table.cmp th { color:var(--muted); font-weight:500; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
     .step { padding:28px 0; border-top:1px solid var(--line); }
     .step:first-child { border-top:0; padding-top:0; }
     .arrow { color:var(--gold); font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.3em; font-size:11px; margin:8px 0 0; }
@@ -73,12 +79,12 @@
   </header>
 
   <div class="wrap" style="padding:48px 0 8px">
-    <div class="kicker">Prove your backtest</div>
-    <h1>Your backtest is one curve.</h1>
-    <p class="lede">Does the strategy actually survive unseen data? Split it. Then decide if you want that work on your own file.</p>
+    <div class="kicker">Backtest robustness research</div>
+    <h1>Your backtest looks good. Has it seen unseen data?</h1>
+    <p class="lede">Sovereign Quant separates the data your strategy was fitted on from the data it never saw. Open the sample. Then send your CSV if you want that work on your file.</p>
     <div class="actions">
-      <a class="btn" href="sample.html">Open the sample</a>
-      <a class="btn ghost" href="#csv">Get the robustness report — A$199</a>
+      <a class="btn" href="sample.html">Open a real report</a>
+      <a class="btn ghost" href="#csv">Robustness report — A$199</a>
     </div>
     <p class="fine">No account. Research HTML only. We do not hold funds and we do not place trades.</p>
   </div>
@@ -99,7 +105,7 @@
     <div class="step">
       <div class="kicker">The question</div>
       <h2>Does it survive unseen data?</h2>
-      <p class="lede">In-sample is the fitted story. Out-of-sample is the one that trades. Most lucky curves fail the split.</p>
+      <p class="lede">The curve didn’t fail. The evidence did. In-sample is the fitted story. Out-of-sample is the one that trades.</p>
       <div class="arrow">↓</div>
     </div>
 
@@ -121,14 +127,14 @@
             points="0,120 40,118 80,110 120,112 160,96 200,90 240,92 280,78 320,70 360,74 400,62 420,64 460,78 500,82 540,88 580,84 600,90" />
         </svg>
       </div>
-      <p class="actions"><a class="btn ghost" href="sample.html">See the example report</a></p>
+      <p class="actions"><a class="btn ghost" href="sample.html">Open a real Sovereign Quant report</a></p>
       <div class="arrow">↓</div>
     </div>
 
     <div class="step" id="csv">
       <div class="kicker">Your CSV</div>
-      <h2>We’ll show in-sample vs out-of-sample.</h2>
-      <p class="lede">Drop a CommSec, IG, IBKR, or plain OHLCV export. Mapping happens on this device. Nothing is uploaded. If the header reads, the report is A$199.</p>
+      <h2>File check first. The split is paid.</h2>
+      <p class="lede">Drop a CommSec, IG, IBKR, or plain OHLCV export. Mapping happens on this device. Nothing is uploaded. A green check means the file can be read — not that the strategy survived.</p>
       <div data-csv-preflight>
         <label class="drop">
           <input type="file" accept=".csv,text/csv" />
@@ -137,10 +143,10 @@
         </label>
         <div data-verdict hidden></div>
       </div>
-      <div class="price">A$199 <em>one CSV → one HTML robustness report</em></div>
+      <div class="price">A$199 <em>Robustness Report · one CSV → one HTML</em></div>
       <p class="no">No signals · no API keys · no custody · not AFSL advice</p>
       <div class="actions">
-        <a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Get your robustness report — A$199</a>
+        <a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Get the robustness report — A$199</a>
         <a class="btn ghost" href="work.html">File spec</a>
       </div>
       <p class="fine">Pay Stripe, email the CSV to reports@sovereignquant.com.au with the receipt. Two business days. Unreadable file after one mapping attempt: that unit refunded. We do not invent bars.</p>
@@ -169,10 +175,18 @@
   <section class="wrap" id="buy">
     <div class="kicker">The ladder</div>
     <h2>One market. Then three. Then the machine.</h2>
+    <p class="lede">The Robustness Report is the product. The pack is the same work across three markets. The workstation is after the first paid job — not a cold ask.</p>
+    <table class="cmp">
+      <tr><th></th><th>A$199</th><th>A$799</th></tr>
+      <tr><td>Robustness report (IS / OOS, equity, drawdown)</td><td>One market</td><td>Three markets</td></tr>
+      <tr><td>Comparative notes across files</td><td>—</td><td>Yes</td></tr>
+      <tr><td>Buy / sell list</td><td>Never</td><td>Never</td></tr>
+      <tr><td>Turnaround</td><td>Two business days</td><td>Two business days</td></tr>
+    </table>
     <p class="ladder">
       <b>Free</b> — sample HTML + the books.<br />
-      <b>A$199</b> — one CSV, one robustness report.<br />
-      <b>A$799</b> — three markets, same artefact.<br />
+      <b>A$199 Robustness Report</b> — one CSV.<br />
+      <b>A$799 Multi-market</b> — three files, same artefact.<br />
       <b>Workstation</b> — same judgement, offline, after the first paid report.
     </p>
     <div class="actions">

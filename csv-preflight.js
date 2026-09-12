@@ -82,19 +82,69 @@
       return {
         ok: false,
         fileName: fileName,
+        checks: [
+          { ok: true, label: "File accepted" },
+          { ok: false, label: "Date column" },
+          { ok: false, label: "OHLC or fills mapped" },
+        ],
         message:
           "Unrecognised header. Need a Date column plus OHLCV, or a fills file (datetime, side, qty, price). CommSec / IG / IBKR exports are accepted if they can be mapped.",
       };
     }
     if (!dataRows.length) {
-      return { ok: false, fileName: fileName, message: "Headers only — no bars or fills." };
+      return {
+        ok: false,
+        fileName: fileName,
+        checks: [
+          { ok: true, label: "File accepted" },
+          { ok: true, label: "Date column" },
+          { ok: false, label: "Rows of data" },
+        ],
+        message: "Headers only — no bars or fills.",
+      };
     }
+
+    var dateIdx = 0;
+    headers.forEach(function (h, i) {
+      if (DATE_RE.test(h.trim())) dateIdx = i;
+    });
+    function looseDate(s) {
+      s = (s || "").trim();
+      if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+      if (/^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}/.test(s)) return s;
+      var t = Date.parse(s);
+      if (!isNaN(t)) return new Date(t).toISOString().slice(0, 10);
+      return null;
+    }
+    var first = looseDate(splitCsvLine(dataRows[0])[dateIdx]);
+    var last = looseDate(splitCsvLine(dataRows[dataRows.length - 1])[dateIdx]);
+    var span =
+      first && last ? first + " → " + last : null;
+
+    var checks = [
+      { ok: true, label: "File accepted" },
+      { ok: true, label: "Date column" },
+      {
+        ok: true,
+        label:
+          kind === "ohlcv"
+            ? "OHLC data"
+            : kind === "fills"
+              ? "Fills file"
+              : "Broker export mapped",
+      },
+      { ok: true, label: dataRows.length.toLocaleString("en-AU") + " rows" },
+    ];
+    if (span) checks.push({ ok: true, label: "Range " + span });
+
     return {
       ok: true,
       kind: kind,
       fileName: fileName,
       rows: dataRows.length,
       headers: headers,
+      span: span,
+      checks: checks,
       message: KIND_COPY[kind],
     };
   }
@@ -102,18 +152,25 @@
   function render(el, v) {
     el.hidden = false;
     el.className = "status-box " + (v.ok ? "ok" : "bad");
+    var checks = (v.checks || [])
+      .map(function (c) {
+        return (
+          "<li>" +
+          (c.ok ? "✓" : "✗") +
+          " " +
+          c.label +
+          "</li>"
+        );
+      })
+      .join("");
+    var list = checks
+      ? "<ul class='checks'>" + checks + "</ul>"
+      : "";
     var extra = v.ok
-      ? "<p class='fine' style='margin:8px 0 0'>" +
-        v.rows.toLocaleString("en-AU") +
-        " rows · " +
-        v.kind +
-        " · " +
-        v.headers.slice(0, 6).join(", ") +
-        (v.headers.length > 6 ? "…" : "") +
-        "</p>"
+      ? "<p class='fine' style='margin:8px 0 0'>The file can be mapped. That is not strategy validity. The split is the paid work.</p>"
       : "";
     var pay = v.ok
-      ? '<p class="actions"><a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Proceed — A$199</a></p>'
+      ? '<p class="actions"><a class="btn" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">Get the robustness report — A$199</a></p>'
       : "";
     el.innerHTML =
       "<p><strong>" +
@@ -121,6 +178,7 @@
       "</strong></p><p>" +
       v.message +
       "</p>" +
+      list +
       extra +
       pay;
   }

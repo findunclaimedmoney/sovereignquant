@@ -32,12 +32,22 @@
     svg { width:100%; height:160px; display:block; background:#0c0e0a; }
     footer { color:var(--muted); font-size:12px; line-height:1.5; margin-top:28px; }
     a { color:var(--gold2); }
+    .tour { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; font-size:12px; }
+    .tour a { text-decoration:none; border:1px solid var(--line); padding:8px 10px; color:var(--gold2); }
+    .close { margin-top:22px; padding:16px; border:1px solid var(--gold); }
     @media (max-width:700px){ .grid,.split{grid-template-columns:1fr 1fr;} header{flex-direction:column;} .meta{text-align:left;} }
   </style>
 </head>
 <body>
   <div class="page">
     <div class="banner">Hypothetical sample — public-style demo file — not your account — not a forecast — not advice</div>
+    <nav class="tour">
+      <a href="#original">1 · Original curve</a>
+      <a href="#split">2 · The split</a>
+      <a href="#oos">3 · Out-of-sample</a>
+      <a href="#dd">4 · Drawdown</a>
+      <a href="#not">5 · What it does not say</a>
+    </nav>
     <header>
       <div>
         <div class="brand">SOVEREIGN <b>/</b> QUANT</div>
@@ -51,7 +61,7 @@
       </div>
     </header>
 
-    <h1>Demo series, split in time</h1>
+    <h1 id="original">Demo series, split in time</h1>
     <p class="sub">This is what a paid HTML looks like. Figures below are invented for layout. They are not a live track record and must not be copied as performance.</p>
 
     <div class="grid">
@@ -61,7 +71,7 @@
       <div class="stat"><span>Trades counted</span><b>84</b></div>
     </div>
 
-    <div class="panel">
+    <div class="panel" id="split">
       <h2>Equity (indexed to 100 at start)</h2>
       <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Sample equity curve">
         <line x1="420" y1="10" x2="420" y2="150" stroke="#c9a45c" stroke-dasharray="4 4" stroke-width="1" opacity="0.6"/>
@@ -71,7 +81,7 @@
       </svg>
     </div>
 
-    <div class="panel">
+    <div class="panel" id="dd">
       <h2>Underwater</h2>
       <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Sample drawdown">
         <polyline fill="#3a201c" stroke="#b4554a" stroke-width="1.5"
@@ -91,7 +101,7 @@
           <tr><td>Hit rate</td><td>53%</td></tr>
         </table>
       </div>
-      <div class="panel">
+      <div class="panel" id="oos">
         <h2>Out-of-sample</h2>
         <table>
           <tr><th>Metric</th><th>Value</th></tr>
@@ -104,7 +114,7 @@
       </div>
     </div>
 
-    <div class="panel">
+    <div class="panel" id="not">
       <h2>What this file did not include</h2>
       <table>
         <tr><th>Item</th><th>On this sample</th></tr>
@@ -113,6 +123,15 @@
         <tr><td>Broker login</td><td>Not used</td></tr>
         <tr><td>Advice</td><td>None</td></tr>
       </table>
+    </div>
+
+    <div class="close">
+      <div class="brand" style="margin-bottom:8px">THIS SAMPLE</div>
+      Classification on this hypothetical file: <b>MIXED</b> — in-sample positive, out-of-sample negative. That is the point of the artefact, not a score on your account.
+      <br /><br />
+      Your strategy is not entitled to the result it produced in-sample.
+      <br /><br />
+      <a class="brand" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002" style="color:#070806;background:#c9a45c;padding:12px 16px;display:inline-block;text-decoration:none;letter-spacing:.1em;">Get the robustness report — A$199</a>
     </div>
 
     <footer>
