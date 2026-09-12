@@ -2,9 +2,17 @@
   var KEY = "sq-mia-v2";
   var STRIPE199 = "https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002";
   var STRIPE799 = "https://buy.stripe.com/9B64gz4p8cOs7y02cYes004";
+  var STRIPEV1 = "https://buy.stripe.com/fZucN58Fo29O5pSbNyes005";
+  var STRIPEV2 = "https://buy.stripe.com/14AdR9f3M4hWdWo6tees006";
+  var STRIPEPRO = "https://buy.stripe.com/14A8wPdZI7u86tW18Ues003";
+  var STRIPEINST = "https://buy.stripe.com/eVq14n9Js3dS19CcRCes000";
   var MAIL = "mailto:reports@sovereignquant.com.au";
   var A199 = '<a href="' + STRIPE199 + '">A$199</a>';
   var A799 = '<a href="' + STRIPE799 + '">A$799 pack</a>';
+  var V1 = '<a href="' + STRIPEV1 + '">Volume I A$19.90</a>';
+  var V2 = '<a href="' + STRIPEV2 + '">Volume II A$19.90</a>';
+  var PRO = '<a href="' + STRIPEPRO + '">Professional US$499/yr</a>';
+  var INST = '<a href="' + STRIPEINST + '">Institutional US$1,999/yr</a>';
   var SAMPLE = '<a href="sample.html">sample report</a>';
   var SPEC = '<a href="work.html">file spec</a>';
   var AFTER = '<a href="after.html">after you pay</a>';
@@ -76,9 +84,10 @@
       id: "what",
       q: "what do you sell what is this product what is sovereign quant what do i get what is a robustness report",
       a:
-        "Sovereign Quant sells <strong>research HTML</strong>, not a trade.<br><br>" +
-        "Product name: <strong>Robustness Report</strong>. We take your broker CSV and return a walk-forward: in-sample vs out-of-sample, equity, drawdown. No buy list. No login. No custody.<br><br>" +
-        "One market " + A199 + ". Three markets + comparative notes " + A799 + ".<br><br>" +
+        "Sovereign Quant sells research HTML, two PDFs, and an offline workstation licence. Not a trade.<br><br>" +
+        "One market " + A199 + ". Three markets " + A799 + ".<br>" +
+        "Books " + V1 + " · " + V2 + ".<br>" +
+        "Workstation " + PRO + " or " + INST + ".<br><br>" +
         "Start with the " + SAMPLE + ".",
     },
     {
@@ -201,16 +210,19 @@
     },
     {
       id: "books",
-      q: "book volume pdf philosophy method education free read volume i volume ii",
+      q: "book volume pdf philosophy method education free read volume i volume ii 19.90 19 1990 doctrine",
       a:
-        "Volume I and II are the free read — the judgement behind the split, not a signal. Education, then the " + SAMPLE + ", then a paid file if you still want the work on your data.<br><br>" +
-        '<a href="/book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf">Vol. I PDF</a> · <a href="/book/Sovereign_Quant_Volume_II_Architecture.pdf">Vol. II PDF</a>',
+        "The books are paid. A$19.90 each. Volume I is the judgement behind the split. Volume II is the architecture. Not a signal, not a free download on this site — the sample HTML is the free look.<br><br>" +
+        V1 + " · " + V2,
     },
     {
       id: "workstation",
-      q: "workstation offline machine license licence pro professional hmac desktop software key yearly",
+      q: "workstation offline machine license licence pro professional hmac desktop software key yearly 499 1999 institutional capital",
       a:
-        "The workstation is the same judgement, offline, after at least one paid report. Software licensing — Community / Professional style keys — not a fund and not this chat's checkout. Do not start there. Sample, then one file. Then ask the desk about a yearly key.",
+        "The workstation is software you run locally. HMAC licence key by email after Stripe. Not a fund, not custody, not a cloud desk.<br><br>" +
+        PRO + " — US$1,000,000 capital gate, 3 strategies, walk-forward + branded HTML.<br>" +
+        INST + " — US$50,000,000 capital gate, 10 strategies, Monte Carlo / multi-account.<br><br>" +
+        "The ceiling is a licence gate, not money we hold. Start with the " + SAMPLE + " if you have not seen the artefact.",
     },
     {
       id: "compare",
