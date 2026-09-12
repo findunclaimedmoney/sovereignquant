@@ -15,6 +15,15 @@
     code, pre { font-family: ui-monospace, Menlo, monospace; color:#ead7a8; font-size:13px; }
     pre { background:#161910; border:1px solid #2c2f24; padding:16px; overflow:auto; }
     .btn { display:inline-block; margin-top:8px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:11px; padding:12px 16px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; }
+    .drop { display:block; cursor:pointer; border:1px dashed #2c2f24; background:#0c0e0a; padding:36px 20px; text-align:center; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; color:#ead7a8; margin-top:16px; }
+    .drop.over { border-color:#c9a45c; background:#161910; }
+    .drop input { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    .drop small { display:block; margin-top:8px; color:#9b9686; font-size:12px; }
+    .status-box { margin-top:14px; border:1px solid #2c2f24; padding:14px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; }
+    .status-box.ok { border-color:#3d5a32; background:#12160f; color:#f3efe3; }
+    .status-box.bad { border-color:#b4554a; background:#1a100e; color:#b4554a; }
+    .fine { font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; color:#9b9686; }
+    .actions { margin:12px 0 0; }
   </style>
 </head>
 <body>
@@ -39,6 +48,18 @@
       <li>A request for what to buy tomorrow</li>
     </ul>
     <p><a class="btn" href="https://buy.stripe.com/9B64gz4p8cOs7y02cYes004">Pay A$799 pack</a></p>
+
+    <h2>Test the header. $0.</h2>
+    <p>Mapping happens on this device. Nothing is uploaded.</p>
+    <div data-csv-preflight>
+      <label class="drop">
+        <input type="file" accept=".csv,text/csv" />
+        Select broker CSV
+        <small>or drop it here · stays in the browser</small>
+      </label>
+      <div data-verdict hidden></div>
+    </div>
   </div>
+  <script src="csv-preflight.js"></script>
 </body>
 </html>

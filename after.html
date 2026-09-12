@@ -12,6 +12,11 @@
     h1 { font-size:42px; font-weight:500; }
     p, li { color:#9b9686; line-height:1.55; }
     code { font-family: ui-monospace, Menlo, monospace; color:#ead7a8; }
+    .panel { margin-top:36px; background:#161910; border:1px solid #2c2f24; padding:20px; }
+    label { display:block; font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#9b9686; }
+    input { margin-top:8px; width:100%; min-height:44px; border:1px solid #2c2f24; background:#070806; color:#f3efe3; padding:0 12px; font-family:ui-monospace,Menlo,monospace; font-size:14px; }
+    input:focus { outline:none; border-color:#c9a45c; }
+    .btn { display:inline-block; margin-top:16px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; }
   </style>
 </head>
 <body>
@@ -27,6 +32,35 @@
     </ol>
     <p>Licence buyers (US$499/yr): signed key and zip. You run it locally.</p>
     <p>PDF buyers (A$29): Stripe download or email.</p>
+
+    <div class="panel">
+      <h2 style="font-weight:500;margin:0 0 8px">Open the mail client</h2>
+      <p>Paste the receipt. This writes the subject and body. You still attach the CSV yourself — we do not take the file in the browser.</p>
+      <label>Stripe receipt / session id
+        <input id="receipt" placeholder="cs_live_… or receipt number" />
+      </label>
+      <a class="btn" id="mail" href="mailto:reports@sovereignquant.com.au?subject=Stripe%20receipt">Compose the email</a>
+    </div>
   </div>
+  <script>
+    (function () {
+      var input = document.getElementById("receipt");
+      var link = document.getElementById("mail");
+      function build() {
+        var r = (input.value || "").trim();
+        var subject = r ? "Stripe receipt " + r : "Stripe receipt";
+        var body = [
+          "Receipt number:",
+          r || "[paste Stripe receipt / session id]",
+          "",
+          "Attached: one CSV per market (OHLCV, or a fills file).",
+          "I have not sent passwords, API keys, or a request for what to buy tomorrow."
+        ].join("\r\n");
+        link.href = "mailto:reports@sovereignquant.com.au?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      }
+      input.addEventListener("input", build);
+      build();
+    })();
+  </script>
 </body>
 </html>

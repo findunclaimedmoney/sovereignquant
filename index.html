@@ -11,14 +11,16 @@
   <meta property="og:url" content="https://sovereignquant.com.au/" />
   <meta property="og:type" content="website" />
   <style>
-    :root { --bg:#070806; --panel:#161910; --line:#2c2f24; --gold:#c9a45c; --gold2:#ead7a8; --ink:#f3efe3; --muted:#9b9686; --bad:#b4554a; }
+    :root { --bg:#070806; --panel:#161910; --line:#2c2f24; --gold:#c9a45c; --gold2:#ead7a8; --ink:#f3efe3; --muted:#9b9686; --bad:#b4554a; --ok:#7a9a62; }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; }
     a { color:var(--gold2); }
     .wrap { width:min(720px, calc(100% - 36px)); margin:0 auto; }
-    header { padding:16px 0; border-bottom:1px solid var(--line); font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.2em; font-size:11px; }
+    header { padding:16px 0; border-bottom:1px solid var(--line); font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.2em; font-size:11px; display:flex; justify-content:space-between; gap:16px; align-items:center; }
     header b { color:var(--gold); }
+    header nav { letter-spacing:.14em; }
+    header nav a { margin-left:14px; text-decoration:none; }
     .kicker { font-family:ui-sans-serif,system-ui,sans-serif; color:var(--gold); letter-spacing:.2em; font-size:11px; text-transform:uppercase; }
     h1 { font-size:clamp(34px, 8vw, 56px); line-height:.95; font-weight:500; margin:12px 0 16px; }
     .lede { font-size:18px; color:var(--muted); line-height:1.5; }
@@ -26,8 +28,9 @@
     .btn { display:inline-block; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid var(--gold); color:var(--bg); background:var(--gold); }
     .btn.ghost { background:transparent; color:var(--gold2); }
     .fine { font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; color:var(--muted); }
-    .vid { margin:28px 0; border:1px solid var(--line); background:#0c0e0a; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; color:var(--muted); font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; }
-    .vid strong { display:block; color:var(--gold2); margin-bottom:8px; letter-spacing:.12em; font-size:11px; text-transform:uppercase; }
+    .vid { margin:28px 0 8px; border:1px solid var(--line); background:#0c0e0a; }
+    .vid video { width:100%; display:block; aspect-ratio:16/9; background:#0c0e0a; }
+    .vid p { margin:0; padding:12px 14px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; color:var(--muted); line-height:1.5; }
     section { padding:40px 0; border-top:1px solid var(--line); }
     h2 { font-size:26px; font-weight:500; margin:0 0 12px; }
     ol { color:var(--muted); line-height:1.55; padding-left:20px; }
@@ -36,10 +39,33 @@
     .no { color:var(--bad); font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
     footer { padding:28px 0 48px; border-top:1px solid var(--line); color:var(--muted); font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; }
     footer a { margin-right:12px; }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0; }
+    .stat { background:var(--panel); border:1px solid var(--line); padding:14px; }
+    .stat span { display:block; color:var(--muted); font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px; font-family:ui-sans-serif,system-ui,sans-serif; }
+    .stat b { font-size:20px; font-weight:500; font-family:ui-sans-serif,system-ui,sans-serif; }
+    .neg { color:var(--bad); }
+    .pos { color:var(--ok); }
+    .panel { background:var(--panel); border:1px solid var(--line); padding:16px; }
+    svg { width:100%; height:160px; display:block; background:#0c0e0a; }
+    .drop { display:block; cursor:pointer; border:1px dashed var(--line); background:#0c0e0a; padding:36px 20px; text-align:center; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; color:var(--gold2); }
+    .drop.over { border-color:var(--gold); background:var(--panel); }
+    .drop input { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    .drop small { display:block; margin-top:8px; color:var(--muted); font-size:12px; }
+    .status-box { margin-top:14px; border:1px solid var(--line); padding:14px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:14px; }
+    .status-box.ok { border-color:#3d5a32; background:#12160f; }
+    .status-box.bad { border-color:var(--bad); background:#1a100e; color:var(--bad); }
+    @media (max-width:700px){ .grid{grid-template-columns:1fr 1fr;} header{flex-wrap:wrap;} }
   </style>
 </head>
 <body>
-  <header class="wrap">SOVEREIGN <b>/</b> QUANT</header>
+  <header class="wrap">
+    <span>SOVEREIGN <b>/</b> QUANT</span>
+    <nav>
+      <a href="sample.html">Sample</a>
+      <a href="work.html">File spec</a>
+      <a href="after.html">After pay</a>
+    </nav>
+  </header>
 
   <div class="wrap" style="padding:48px 0 24px">
     <div class="kicker">Free look · then your file</div>
@@ -50,7 +76,7 @@
       We do not hold funds and we do not place trades.
     </p>
     <div class="actions">
-      <a class="btn" href="/book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf">Free look — the books</a>
+      <a class="btn" href="sample.html">Open the sample</a>
       <a class="btn ghost" href="https://buy.stripe.com/cNibJ108S6q4aKc9Fqes002">My file — A$199</a>
     </div>
     <p class="fine">No account. Pay Stripe, email the CSV to reports@sovereignquant.com.au with the receipt.</p>
@@ -58,14 +84,48 @@
 
   <div class="wrap">
     <div class="vid" id="video">
-      <div>
-        <strong>45-second clip goes here</strong>
-        Record it on your phone. Face plus the sample report on screen.<br />
-        Replace this box with an MP4 or a YouTube embed.<br />
-        Script is in the HTML comment at the bottom of this file.
-      </div>
+      <video controls playsinline preload="metadata" poster="/video/poster.jpg">
+        <source src="/video/sq-45.mp4" type="video/mp4" />
+      </video>
+      <p>45 seconds. Silent captions. Not a track record. Face-on desk clip still belongs on your phone if you want that cut.</p>
     </div>
   </div>
+
+  <section class="wrap">
+    <div class="kicker">The artefact</div>
+    <h2>In-sample is the fitted story.</h2>
+    <p class="lede">Out-of-sample is the one that trades. The live sample is hypothetical layout on public-style data — including a negative OOS. That is the point.</p>
+    <div class="grid">
+      <div class="stat"><span>IS return</span><b class="pos">+12.4%</b></div>
+      <div class="stat"><span>OOS return</span><b class="neg">−3.1%</b></div>
+      <div class="stat"><span>Max DD</span><b class="neg">−9.8%</b></div>
+      <div class="stat"><span>Trades</span><b>84</b></div>
+    </div>
+    <div class="panel">
+      <div class="kicker" style="margin-bottom:10px">Equity · indexed to 100 · dashed line is the split</div>
+      <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Sample equity curve">
+        <line x1="420" y1="10" x2="420" y2="150" stroke="#c9a45c" stroke-dasharray="4 4" stroke-width="1" opacity="0.6"/>
+        <text x="428" y="22" fill="#ead7a8" font-size="10" font-family="system-ui">OOS →</text>
+        <polyline fill="none" stroke="#c9a45c" stroke-width="2"
+          points="0,120 40,118 80,110 120,112 160,96 200,90 240,92 280,78 320,70 360,74 400,62 420,64 460,78 500,82 540,88 580,84 600,90" />
+      </svg>
+    </div>
+    <p class="actions"><a class="btn ghost" href="sample.html">Full sample HTML</a></p>
+  </section>
+
+  <section class="wrap" id="preflight">
+    <div class="kicker">Before you pay</div>
+    <h2>Test the header. $0.</h2>
+    <p class="lede">Drop a CommSec, IG, IBKR, or plain OHLCV export. Mapping happens on this device. Nothing is uploaded. If it reads, the A$199 button is for you.</p>
+    <div data-csv-preflight>
+      <label class="drop">
+        <input type="file" accept=".csv,text/csv" />
+        Select broker CSV
+        <small>or drop it here · stays in the browser</small>
+      </label>
+      <div data-verdict hidden></div>
+    </div>
+  </section>
 
   <section class="wrap">
     <div class="kicker">The free experience</div>
@@ -79,7 +139,7 @@
       <li>File spec — what to export from CommSec, IG, or IBKR.</li>
       <li>When you have it: a public-data sample HTML at /sample.</li>
     </ol>
-    <p>
+    <p class="actions">
       <a class="btn ghost" href="/book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf">Vol. I PDF</a>
       <a class="btn ghost" href="/book/Sovereign_Quant_Volume_II_Architecture.pdf">Vol. II PDF</a>
       <a class="btn ghost" href="work.html">What to send</a>
@@ -116,5 +176,6 @@
       <a href="https://play.google.com/store/books/details?id=X_8HEgAAQBAJ">Play II</a>
     </div>
   </footer>
+  <script src="csv-preflight.js"></script>
 </body>
 </html>
