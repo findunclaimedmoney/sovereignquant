@@ -1,0 +1,12 @@
+# Sovereign Quant — https://sovereignquant.com.au
+User-agent: *
+Allow: /
+Allow: /sample
+Allow: /sample.html
+Allow: /work.html
+Allow: /after.html
+
+Disallow: /video/
+
+Sitemap: https://sovereignquant.com.au/sitemap.xml
+Sitemap: https://www.sovereignquant.com.au/sitemap.xml
