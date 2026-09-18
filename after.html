@@ -16,34 +16,60 @@
     label { display:block; font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#9b9686; }
     input { margin-top:8px; width:100%; min-height:44px; border:1px solid #2c2f24; background:#070806; color:#f3efe3; padding:0 12px; font-family:ui-monospace,Menlo,monospace; font-size:14px; }
     input:focus { outline:none; border-color:#c9a45c; }
-    .btn { display:inline-block; margin-top:16px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; }
+    .btn { display:inline-block; margin-top:16px; margin-right:10px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; }
+    .btn.ghost { background:transparent; color:#ead7a8; }
+    .hide { display:none; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <p><a href="index.html">← Home</a></p>
     <div class="kicker">Customer</div>
-    <h1>After Stripe</h1>
-    <ol>
-      <li>Keep the Stripe receipt.</li>
-      <li>Email CSV(s) to <code>reports@sovereignquant.com.au</code> with the receipt number.</li>
-      <li>One file for A$199. Three files for A$799.</li>
-      <li>You receive HTML. Not a live terminal.</li>
-    </ol>
-    <p>PDF (A$19.90): Stripe receipt — desk emails Volume I or II. Not a free download.</p>
-    <p>Professional US$499/yr or Institutional US$1,999/yr: signed HMAC key and zip. You run it locally. Not custody.</p>
+    <h1 id="title">After Stripe</h1>
 
-    <div class="panel">
-      <h2 style="font-weight:500;margin:0 0 8px">Open the mail client</h2>
-      <p>Paste the receipt. This writes the subject and body. You still attach the CSV yourself — we do not take the file in the browser.</p>
-      <label>Stripe receipt / session id
-        <input id="receipt" placeholder="cs_live_… or receipt number" />
-      </label>
-      <a class="btn" id="mail" href="mailto:reports@sovereignquant.com.au?subject=Stripe%20receipt">Compose the email</a>
+    <div id="book" class="hide">
+      <p>Your PDF is ready. Save it now. Stripe also emails a receipt.</p>
+      <p>
+        <a class="btn" id="dl" href="#">Download the PDF</a>
+        <a class="btn ghost" href="sample.html">Open the sample report</a>
+      </p>
+      <p>Volume II is A$19.90 if you want the architecture next.</p>
+    </div>
+
+    <div id="report">
+      <ol>
+        <li>Keep the Stripe receipt.</li>
+        <li>Email CSV(s) to <code>reports@sovereignquant.com.au</code> with the receipt number.</li>
+        <li>One file for A$199. Three files for A$799.</li>
+        <li>You receive HTML. Not a live terminal.</li>
+      </ol>
+      <div class="panel">
+        <h2 style="font-weight:500;margin:0 0 8px">Open the mail client</h2>
+        <p>Paste the receipt. This writes the subject and body. You still attach the CSV yourself.</p>
+        <label>Stripe receipt / session id
+          <input id="receipt" placeholder="cs_live_… or receipt number" />
+        </label>
+        <a class="btn" id="mail" href="mailto:reports@sovereignquant.com.au?subject=Stripe%20receipt">Compose the email</a>
+      </div>
     </div>
   </div>
   <script>
     (function () {
+      var q = new URLSearchParams(location.search);
+      var item = (q.get("item") || "").toLowerCase();
+      var books = {
+        vol1: { title: "Volume I is ready", href: "book/Sovereign_Quant_Volume_I_Black_and_Gold.pdf" },
+        vol2: { title: "Volume II is ready", href: "book/Sovereign_Quant_Volume_II_Architecture.pdf" }
+      };
+      if (books[item]) {
+        document.getElementById("title").textContent = books[item].title;
+        document.getElementById("dl").href = books[item].href;
+        document.getElementById("book").classList.remove("hide");
+        document.getElementById("report").classList.add("hide");
+        return;
+      }
+      if (item === "799") document.getElementById("title").textContent = "Three-market pack — send the files";
+      if (item === "199") document.getElementById("title").textContent = "A$199 — send the CSV";
       var input = document.getElementById("receipt");
       var link = document.getElementById("mail");
       function build() {

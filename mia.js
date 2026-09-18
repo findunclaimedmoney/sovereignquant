@@ -214,7 +214,7 @@
       id: "books",
       q: "book volume pdf philosophy method education free read volume i volume ii 19.90 19 1990 doctrine",
       a:
-        "The books are paid. A$19.90 each. Volume I is the judgement behind the split. Volume II is the architecture. Not a signal, not a free download on this site — the sample HTML is the free look.<br><br>" +
+        "The books are paid. A$19.90 each. Volume I is the judgement behind the split. Volume II is the architecture. After Stripe the PDF downloads on this site. Google Play if you want the store.<br><br>" +
         V1 + " · " + V2 +
         '<br><br>Google Play: <a href="https://play.google.com/store/books/details?id=9JUHEgAAQBAJ">Volume I</a> · <a href="https://play.google.com/store/books/details?id=X_8HEgAAQBAJ">Volume II</a>',
     },
