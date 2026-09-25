@@ -69,7 +69,12 @@
         return;
       }
       if (item === "799") document.getElementById("title").textContent = "Three-market pack — send the files";
-      if (item === "199") document.getElementById("title").textContent = "A$199 — send the CSV";
+      if (item === "199" || item === "bundle") {
+        document.getElementById("title").textContent = "Bundle — Volume I is ready. Then send one CSV.";
+        document.getElementById("book").classList.remove("hide");
+        document.getElementById("dl").href = books.vol1.href;
+        document.getElementById("dl").textContent = "Download Volume I";
+      }
       var input = document.getElementById("receipt");
       var link = document.getElementById("mail");
       function build() {
