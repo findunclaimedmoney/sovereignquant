@@ -16,6 +16,8 @@
   var SAMPLE = '<a href="sample.html">sample report</a>';
   var SPEC = '<a href="work.html">file spec</a>';
   var AFTER = '<a href="after.html">after you pay</a>';
+  var REFUND = '<a href="refund.html">30-day refund</a>';
+  var PACKS = '<a href="packages.html">packages</a>';
   var CSV = '<a href="/#csv">CSV check</a>';
   var BUY = '<a href="/#buy">why three markets</a>';
   var DESK = '<a href="' + MAIL + '">reports@sovereignquant.com.au</a>';
@@ -63,8 +65,12 @@
       return "Books page. Volume I and II are A$19.90 each — Stripe or Google Play. Doctrine, not a signal.";
     if (PAGE.indexOf("work") !== -1)
       return "This is the " + SPEC + ". Date + OHLCV, or fills. One market per file.";
+    if (PAGE.indexOf("refund") !== -1)
+      return "Refund page. 30 days from the Stripe payment. Email the receipt and the word refund. No reason needed.";
+    if (PAGE.indexOf("package") !== -1)
+      return "Packages page. The bundle is Volume I plus one report for A$199. Apart, those two are A$218.90.";
     if (PAGE.indexOf("after") !== -1)
-      return "After Stripe: email the CSV to " + DESK + " with the receipt number.";
+      return "After Stripe. If this was the bundle, Volume I is on this page. Then email one CSV to " + DESK + " with the receipt.";
     return "";
   }
 
@@ -78,7 +84,8 @@
     "notes custody signal advice afsl login api checkout fulfilment fulfillment " +
     "price cost pay order buy file spec column header date bars tick mt4 mt5 " +
     "crypto asx nasdaq forex futures options portfolio upgrade three one " +
-    "business days monday weekend human desk australia gst invoice abn"
+    "business days monday weekend human desk australia gst invoice abn " +
+    "bundle guarantee thirty refund star package dominance mt5 metatrader aureus"
   ).split(" ");
 
   var KB = [
@@ -86,11 +93,12 @@
       id: "what",
       q: "what do you sell what is this product what is sovereign quant what do i get what is a robustness report",
       a:
-        "Sovereign Quant sells research HTML, two PDFs, and an offline workstation licence. Not a trade.<br><br>" +
-        "One market " + A199 + ". Three markets " + A799 + ".<br>" +
-        "Books " + V1 + " · " + V2 + ".<br>" +
-        "Workstation " + PRO + " or " + INST + ".<br><br>" +
-        "Start with the " + SAMPLE + ".",
+        "Sovereign Quant on this site sells research, two books, and an offline workstation. Not a trade, and not a live track record.<br><br>" +
+        "The bundle is the one to start with if you want both: Volume I and one report, " + A199 + ". Bought apart that is A$218.90.<br>" +
+        "Three markets " + A799 + ". Books alone " + V1 + " · " + V2 + ".<br>" +
+        "Workstation " + PRO + " or " + INST + ".<br>" +
+        "30 days if you don’t like it. " + REFUND + ".<br><br>" +
+        "Look at the " + SAMPLE + " first. The +12.4% / −3.1% split is layout, not a client result.",
     },
     {
       id: "walkforward",
@@ -117,9 +125,9 @@
       id: "price199",
       q: "price cost how much 199 single one market one file fee cheap expensive aud dollar",
       a:
-        "<strong>A$199</strong> — one CSV, one Robustness Report HTML. Two business days after a readable file arrives.<br><br>" +
-        "No subscription. No account. Pay Stripe, email the CSV with the receipt.<br><br>" +
-        A199 + " · " + CSV + " first if you want to know the header maps.",
+        "<strong>A$199</strong> is the bundle: Volume I PDF and one Robustness Report. Apart they are A$218.90.<br><br>" +
+        "The PDF is immediate. The report is two business days after a readable CSV arrives with the receipt.<br><br>" +
+        A199 + " · " + PACKS + " · " + CSV + " if you want the header checked first.",
     },
     {
       id: "price799",
@@ -178,7 +186,9 @@
       id: "refund",
       q: "refund money back cancel unreadable wrong file dislike oos negative",
       a:
-        "Unreadable file after one mapping attempt: that unit refunded. We do not invent bars.<br><br>If we delivered the HTML and you dislike a negative out-of-sample, that is the product working — not a refund.",
+        "30 days from the Stripe payment, on anything bought on this website. Email " + DESK + " with the receipt number and the word refund. You do not have to explain. Not liking it is enough, including if the out-of-sample number is ugly.<br><br>" +
+        "The money goes back to the same card. A delivered PDF does not cancel it. Trading losses are not refunded — only the price you paid us.<br><br>" +
+        REFUND + ".",
     },
     {
       id: "guard",
@@ -255,7 +265,24 @@
       id: "who-mia",
       q: "who are you mia bot ai sales customer service",
       a:
-        "Mia — sales and customer service for <strong>this website only</strong>. I know the product, the files, the prices, fulfilment, and the refusals. I remember this browser, not a cloud login. I am not a trader. For a human: " + DESK + ".",
+        "I’m Mia. I work this desk: what you get, what it costs, and what happens after you pay. I remember this browser, not a cloud account. I’m not a trader, and I won’t invent a track record. A person is at " + DESK + ".",
+    },
+    {
+      id: "bundle",
+      q: "bundle both together package method file volume included star 218 19.90 plus 199 pair",
+      a:
+        "The bundle is both products in one checkout. Volume I, the method, and one robustness report on your file. <strong>A$199</strong>. Apart that is A$19.90 plus A$199, which is A$218.90.<br><br>" +
+        "Gold star on the box. " + REFUND + " if you don’t like it.<br><br>" +
+        A199 + " · " + PACKS,
+    },
+    {
+      id: "mt5door",
+      q: "metatrader mt5 expert advisor ea aureus matrix macro pulse orb nexus yen momentum equity flow session launch gold vertex harvester night crawler breakout sovereign-quant.com german automated system licence license other site",
+      a:
+        "Two doors, one name.<br><br>" +
+        "This site, sovereignquant.com.au, is the research: books, the bundle, the report, the Dominance Pack, the workstation. Prices are on the buttons.<br><br>" +
+        "The other site, sovereign-quant.com, licences automated MetaTrader 5 systems for the buyer’s own account — names such as Aureus Matrix, Macro Pulse, Orb Nexus, Yen Momentum, Equity Flow, Session Launch, Gold Vertex, Gold Harvester, Night Crawler, Breakout Engine. The price there is a conversation, not a Stripe button here.<br><br>" +
+        "I will not quote that site’s tests as a track record. The sample split on this page is invented for layout. " + SAMPLE + ".",
     },
   ];
 
@@ -307,8 +334,11 @@
       if (item.q.indexOf(w) !== -1) hit += 1;
     }
     var qlow = query.toLowerCase();
-    if (item.id === "price799" && (qlow.indexOf("799") !== -1 || qlow.indexOf("three") !== -1)) hit += 6;
-    if (item.id === "price199" && qlow.indexOf("199") !== -1 && qlow.indexOf("799") === -1) hit += 6;
+    if (item.id === "bundle" && (qlow.indexOf("bundle") !== -1 || qlow.indexOf("both") !== -1)) hit += 8;
+    if (item.id === "refund" && (qlow.indexOf("refund") !== -1 || qlow.indexOf("money") !== -1 || qlow.indexOf("guarantee") !== -1)) hit += 8;
+    if (item.id === "mt5door" && (qlow.indexOf("mt5") !== -1 || qlow.indexOf("metatrader") !== -1 || qlow.indexOf("aureus") !== -1)) hit += 8;
+    if (item.id === "price199" && qlow.indexOf("199") !== -1 && qlow.indexOf("799") === -1 && qlow.indexOf("bundle") === -1) hit += 4;
+    if (item.id === "price799" && (qlow.indexOf("799") !== -1 || qlow.indexOf("dominance") !== -1)) hit += 6;
     if (item.id === "sample" && qlow.indexOf("sample") !== -1) hit += 5;
     return hit;
   }
@@ -333,7 +363,7 @@
     return (
       "Hello" +
       (n ? " " + n : "") +
-      ". Mia — sales and customer service for this desk. I can answer any product question: what you get, the sample, CSV spec, A$199 vs A$799, Stripe, fulfilment, refunds, and what we refuse. What do you need?"
+      ". I’m Mia. Tell me whether you have a file, or you just want the method. The bundle is both, for A$199, and you have 30 days if you don’t like it."
     );
   }
 
@@ -353,8 +383,12 @@
     }
     if (/^(hi|hey|hello|g'day|gday|howdy|good (morning|afternoon|evening))\b/.test(t) && tokens(t).length < 4)
       return greet();
-    if (/\b(thanks|thank you|cheers)\b/.test(t) && tokens(t).length < 5)
-      return "You're welcome" + (name() ? ", " + name() : "") + ". Next step is usually the " + SAMPLE + ", then " + CSV + ", then Stripe.";
+    if (/\b(thanks|thank you|cheers|ta)\b/.test(t) && tokens(t).length < 6)
+      return "Anytime" + (name() ? ", " + name() : "") + ". I’m here if the next question is the file, the price, or a refund.";
+
+    if (/\b(confused|lost|frustrat|annoyed|angry|scam|waste|useless)\b/.test(t)) {
+      mark("tone");
+    }
 
     var ranked = KB.map(function (item) {
       return { item: item, n: kbScore(text, item) };
@@ -381,10 +415,15 @@
 
     mark(top.item.id);
     var out = top.item.a;
-    if (ranked[1] && ranked[1].n >= top.n - 2 && ranked[1].n >= 4 && ranked[1].item.id !== top.item.id) {
-      out += "<br><br><em>Also:</em> " + ranked[1].item.a;
+    var askedTwo = /\band\b/.test(t);
+    if (askedTwo && ranked[1] && ranked[1].n >= 6 && ranked[1].item.id !== top.item.id) {
+      out += "<br><br>" + ranked[1].item.a;
     }
-    return (name() && mem.turns.length < 3 ? name() + " — " : "") + out;
+    var lead = "";
+    if (/\b(confused|lost|frustrat|annoyed|angry|scam|waste)\b/.test(t)) lead = "That’s fair. One answer. ";
+    else if (/\b(worried|nervous|unsure|not sure)\b/.test(t)) lead = "Then don’t pay yet. ";
+    else if (name() && mem.turns.length < 2) lead = name() + " — ";
+    return lead + out;
   }
 
   function injectCss() {
