@@ -19,7 +19,8 @@
     h1 { font-size:clamp(28px, 6vw, 42px); font-weight:500; margin:12px 0 8px; }
     .lede { font-size:17px; color:var(--muted); line-height:1.5; margin-bottom:32px; }
     .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; margin:32px 0 48px; }
-    @media (max-width:800px){ .grid{grid-template-columns:1fr;} }
+    @media (max-width:800px){ .grid, .grid.two { grid-template-columns:1fr; } }
+    .grid.two { grid-template-columns:repeat(2, 1fr); }
     .card { background:var(--panel); border:1px solid var(--line); padding:20px 18px 24px; text-align:center; }
     .card img { width:100%; max-width:280px; height:auto; display:block; margin:0 auto 18px; border-radius:4px; }
     .card h2 { font-size:18px; font-weight:500; margin:0 0 6px; }
@@ -43,7 +44,11 @@
   <div class="wrap" style="padding:40px 0 8px">
     <div class="kicker">Packages</div>
     <h1>Choose your package</h1>
-    <p class="lede">One system. Clear value. Research only — not signals, not AFSL advice.</p>
+    <p class="lede">Two doors. One brand. This page sells the Australian research. The MetaTrader systems live on the other site. The sample split on this domain is layout, not a live track record.</p>
+
+    <div class="kicker">Australia · this site</div>
+    <h2 style="font-size:26px;font-weight:500;margin:8px 0 0">Research you can buy today</h2>
+    <p class="lede" style="margin-top:10px">Volume I is the first cheque. The report is your file. None of these is a signal.</p>
 
     <div class="grid">
       <div class="card">
@@ -70,6 +75,31 @@
         <p class="fine">Three markets · comparative notes</p>
       </div>
     </div>
+
+    <div class="kicker" style="margin-top:12px">The machine</div>
+    <div class="grid two">
+      <div class="card">
+        <h2>Professional workstation</h2>
+        <div class="price">US$499 / yr</div>
+        <a class="btn" href="https://buy.stripe.com/14A8wPdZI7u86tW18Ues003">Buy Professional</a>
+        <p class="fine">Offline. HMAC key. Three strategies. Not custody.</p>
+      </div>
+      <div class="card">
+        <h2>Institutional workstation</h2>
+        <div class="price">US$1,999 / yr</div>
+        <a class="btn ghost" href="https://buy.stripe.com/eVq14n9Js3dS19CcRCes000">Buy Institutional</a>
+        <p class="fine">Same machine. Wider gate. Still your PC.</p>
+      </div>
+    </div>
+
+    <div class="kicker">Other door · not this checkout</div>
+    <h2 style="font-size:26px;font-weight:500;margin:8px 0 12px">MetaTrader 5 systems</h2>
+    <p class="lede">Automated licences for your own MT5 account — Gold, FX, indices — are sold on <a href="https://sovereign-quant.com/en/">sovereign-quant.com</a>. Price is a personal introduction, not a Stripe button here.</p>
+    <p class="lede">Do not treat that site’s tests as a track record for this page. The +12.4% / −3.1% split on sovereignquant.com.au is invented for layout. It is not client performance and it is not a forecast.</p>
+    <p>
+      <a class="btn ghost" href="https://sovereign-quant.com/en/">Open the MT5 door</a>
+    </p>
+    <p class="fine">Software is not investment advice. Leveraged trading can lose the capital you put in. This Australian desk does not place trades and does not hold funds.</p>
   </div>
 
   <footer class="wrap">
