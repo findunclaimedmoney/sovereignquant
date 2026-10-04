@@ -14,11 +14,13 @@
     code { font-family: ui-monospace, Menlo, monospace; color:#ead7a8; }
     .panel { margin-top:36px; background:#161910; border:1px solid #2c2f24; padding:20px; }
     label { display:block; font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#9b9686; }
-    input { margin-top:8px; width:100%; min-height:44px; border:1px solid #2c2f24; background:#070806; color:#f3efe3; padding:0 12px; font-family:ui-monospace,Menlo,monospace; font-size:14px; }
+    input { margin-top:8px; width:100%; min-height:44px; border:1px solid #2c2f24; background:#070806; color:#f3efe3; padding:0 12px; font-family:ui-monospace,Menlo,monospace; font-size:14px; box-sizing:border-box; }
     input:focus { outline:none; border-color:#c9a45c; }
-    .btn { display:inline-block; margin-top:16px; margin-right:10px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; }
+    .btn { display:inline-block; margin-top:16px; margin-right:10px; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid #c9a45c; color:#070806; background:#c9a45c; cursor:pointer; }
     .btn.ghost { background:transparent; color:#ead7a8; }
     .hide { display:none; }
+    .err { color:#e7b2a8; }
+    .ok { color:#c9d7b2; }
   </style>
 </head>
 <body>
@@ -37,22 +39,22 @@
     </div>
 
     <div id="report">
-      <ol>
-        <li>Keep the Stripe receipt.</li>
-        <li>Email CSV(s) to <code>reports@sovereignquant.com.au</code> with the receipt number.</li>
-        <li>One file for A$199. Three files for A$799.</li>
-        <li>You receive HTML. Not a live terminal.</li>
-      </ol>
+      <p>Drop the CSV here. The split is calculated in this browser and the HTML downloads. The file is not uploaded and it is not emailed.</p>
       <div class="panel">
-        <h2 style="font-weight:500;margin:0 0 8px">Open the mail client</h2>
-        <p>Paste the receipt. This writes the subject and body. You still attach the CSV yourself.</p>
-        <label>Stripe receipt / session id
-          <input id="receipt" placeholder="cs_live_… or receipt number" />
+        <h2 style="font-weight:500;margin:0 0 8px">Build the HTML</h2>
+        <label>CSV · one file for A$199, up to three for A$799
+          <input id="file" type="file" accept=".csv,text/csv" multiple />
         </label>
-        <a class="btn" id="mail" href="mailto:reports@sovereignquant.com.au?subject=Stripe%20receipt">Compose the email</a>
+        <label>Receipt number, optional
+          <input id="receipt" placeholder="Shown on the report. Not checked against Stripe." />
+        </label>
+        <button class="btn" id="build" type="button">Build and download</button>
+        <p id="status"></p>
       </div>
+      <p>If the file will not read, email it to <code>reports@sovereignquant.com.au</code> with the Stripe receipt. One mapping attempt, then that unit is refunded.</p>
     </div>
   </div>
+  <script src="report.js"></script>
   <script>
     (function () {
       var q = new URLSearchParams(location.search);
@@ -68,24 +70,55 @@
         document.getElementById("report").classList.add("hide");
         return;
       }
-      if (item === "799") document.getElementById("title").textContent = "Three-market pack — send the files";
-      if (item === "199") document.getElementById("title").textContent = "A$199 — send the CSV";
-      var input = document.getElementById("receipt");
-      var link = document.getElementById("mail");
-      function build() {
-        var r = (input.value || "").trim();
-        var subject = r ? "Stripe receipt " + r : "Stripe receipt";
-        var body = [
-          "Receipt number:",
-          r || "[paste Stripe receipt / session id]",
-          "",
-          "Attached: one CSV per market (OHLCV, or a fills file).",
-          "I have not sent passwords, API keys, or a request for what to buy tomorrow."
-        ].join("\r\n");
-        link.href = "mailto:reports@sovereignquant.com.au?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      if (item === "799") document.getElementById("title").textContent = "Three-market pack — drop the files";
+      if (item === "199" || item === "bundle") {
+        document.getElementById("title").textContent = "Paid — drop the CSV";
+        if (item === "bundle") {
+          document.getElementById("book").classList.remove("hide");
+          document.getElementById("dl").href = books.vol1.href;
+          document.getElementById("dl").textContent = "Download Volume I";
+        }
       }
-      input.addEventListener("input", build);
-      build();
+      var fileInput = document.getElementById("file");
+      var status = document.getElementById("status");
+      document.getElementById("build").addEventListener("click", function () {
+        var files = Array.prototype.slice.call(fileInput.files || []).slice(0, 3);
+        status.className = "";
+        if (!files.length) {
+          status.className = "err";
+          status.textContent = "Choose a CSV first.";
+          return;
+        }
+        if (!window.SQReport) {
+          status.className = "err";
+          status.textContent = "The report script did not load. Refresh the page.";
+          return;
+        }
+        Promise.all(files.map(function (file) {
+          return file.text().then(function (text) {
+            return window.SQReport.analyse(text, file.name);
+          });
+        })).then(function (list) {
+          var receipt = (document.getElementById("receipt").value || "").trim();
+          var html = window.SQReport.documentHtml(list, receipt);
+          var blob = new Blob([html], { type: "text/html" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "sovereign-quant-split.html";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          status.className = "ok";
+          status.textContent = list.map(function (s) {
+            return s.fileName + ": in-sample " + s.isReturn.toFixed(1) + "%, out-of-sample " + s.oosReturn.toFixed(1) + "%";
+          }).join(" · ");
+        }).catch(function (err) {
+          status.className = "err";
+          status.textContent = err && err.message ? err.message : "That file could not be read.";
+        });
+      });
     })();
   </script>
   <script src="mia.js"></script>
