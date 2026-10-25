@@ -70,14 +70,26 @@
         document.getElementById("report").classList.add("hide");
         return;
       }
-      if (item === "799") document.getElementById("title").textContent = "Three-market pack — drop the files";
+      if (item === "799") document.getElementById("title").textContent = "Three-market pack — send the files";
       if (item === "199" || item === "bundle") {
-        document.getElementById("title").textContent = "Paid — drop the CSV";
-        if (item === "bundle") {
-          document.getElementById("book").classList.remove("hide");
-          document.getElementById("dl").href = books.vol1.href;
-          document.getElementById("dl").textContent = "Download Volume I";
-        }
+        document.getElementById("title").textContent = "Bundle — Volume I is ready. Then send one CSV.";
+        document.getElementById("book").classList.remove("hide");
+        document.getElementById("dl").href = books.vol1.href;
+        document.getElementById("dl").textContent = "Download Volume I";
+      }
+      var input = document.getElementById("receipt");
+      var link = document.getElementById("mail");
+      function build() {
+        var r = (input.value || "").trim();
+        var subject = r ? "Stripe receipt " + r : "Stripe receipt";
+        var body = [
+          "Receipt number:",
+          r || "[paste Stripe receipt / session id]",
+          "",
+          "Attached: one CSV per market (OHLCV, or a fills file).",
+          "I have not sent passwords, API keys, or a request for what to buy tomorrow."
+        ].join("\r\n");
+        link.href = "mailto:reports@sovereignquant.com.au?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       }
       var fileInput = document.getElementById("file");
       var status = document.getElementById("status");
