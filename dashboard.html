@@ -49,7 +49,7 @@
   <div class="wrap" style="padding:40px 0 8px">
     <div class="kicker">Account portal · Phase A</div>
     <h1>Your desk</h1>
-    <p class="lede" id="welcome">Sign in to see licences and downloads.</p>
+    <p class="lede" id="welcome">The licence is no longer behind a sign-in. Collect it after Stripe.</p>
   </div>
 
   <section class="wrap" id="licences">
@@ -62,28 +62,30 @@
         </thead>
         <tbody id="licence-rows">
           <tr>
-            <td colspan="3" class="fine">Loading… (connect Supabase in auth.js to activate)</td>
+            <td colspan="3" class="fine">Open <a href="/login.html">Collect the licence</a>. Type the name on the Stripe receipt. The key downloads in the browser.</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="fine">Purchases made via Stripe appear here after the receipt is matched. Manual fulfilment still available via reports@sovereignquant.com.au.</p>
+    <p class="fine">Stripe emails a receipt only. The key and the zip come from the licence page, not from an account.</p>
   </section>
 
   <section class="wrap" id="download">
     <div class="kicker">Workstation</div>
     <h2>Download &amp; activate</h2>
-    <p class="lede">The software still runs on your machine. The portal only issues the signed key and the package.</p>
+    <p class="lede">The software runs on your machine. Download the zip, then activate with the key from the licence page.</p>
     <div class="grid2">
       <div class="panel">
         <div class="kicker" style="margin-bottom:8px">Professional</div>
         <p class="fine">US$499 / yr · capital ceiling US$1M · 3 concurrent strategies</p>
-        <a class="btn disabled" href="#">Download (requires licence)</a>
+        <a class="btn" href="/login.html">Get the Professional key</a>
+        <a class="btn ghost" href="/workstation/sovereign-quant-workstation.zip">Download zip</a>
       </div>
       <div class="panel">
         <div class="kicker" style="margin-bottom:8px">Institutional</div>
         <p class="fine">US$1,999 / yr · capital ceiling US$50M · 10 strategies · Monte Carlo</p>
-        <a class="btn disabled" href="#">Download (requires licence)</a>
+        <a class="btn" href="/login.html?tier=institutional">Get the Institutional key</a>
+        <a class="btn ghost" href="/workstation/sovereign-quant-workstation.zip">Download zip</a>
       </div>
     </div>
   </section>
@@ -108,28 +110,5 @@
   </footer>
 
   <script src="/auth.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      await window.SQAuth.init();
-      // Phase A scaffold: show demo state until real auth is wired
-      const welcome = document.getElementById("welcome");
-      const rows = document.getElementById("licence-rows");
-      if (window.SQAuth.user) {
-        welcome.textContent = "Signed in as " + (window.SQAuth.user.email || "trader") + ".";
-        rows.innerHTML = `
-          <tr>
-            <td>Dominance Pack / Workstation</td>
-            <td><span class="badge ok">Active</span></td>
-            <td><a href="#">View key</a></td>
-          </tr>`;
-      } else {
-        welcome.innerHTML = 'You are not signed in. <a href="/login.html">Sign in</a> to manage licences.';
-        rows.innerHTML = `
-          <tr>
-            <td colspan="3" class="fine">No session. <a href="/login.html">Sign in</a> or complete a purchase first.</td>
-          </tr>`;
-      }
-    });
-  </script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login — Sovereign Quant</title>
-  <meta name="description" content="Sign in to your Sovereign Quant account. Manage licences, download the workstation, and link platforms." />
+  <title>Your licence — Sovereign Quant</title>
+  <meta name="description" content="After you pay for the workstation, download the signed licence key and the zip. No account login." />
   <link rel="canonical" href="https://sovereignquant.com.au/login.html" />
   <meta name="robots" content="noindex" />
   <style>
@@ -12,7 +12,7 @@
     * { box-sizing: border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; min-height:100vh; display:flex; flex-direction:column; }
     a { color:var(--gold2); }
-    .wrap { width:min(420px, calc(100% - 36px)); margin:0 auto; }
+    .wrap { width:min(560px, calc(100% - 36px)); margin:0 auto; }
     header { padding:16px 0; border-bottom:1px solid var(--line); font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.2em; font-size:11px; display:flex; justify-content:space-between; gap:16px; align-items:center; }
     header b { color:var(--gold); }
     header nav a { margin-left:14px; text-decoration:none; letter-spacing:.14em; }
@@ -21,19 +21,19 @@
     .lede { font-size:16px; color:var(--muted); line-height:1.5; margin-bottom:28px; }
     .panel { background:var(--panel); border:1px solid var(--line); padding:24px; }
     label { display:block; font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:16px 0 6px; }
-    input { width:100%; padding:12px 14px; background:#0c0e0a; border:1px solid var(--line); color:var(--ink); font-size:15px; font-family:ui-sans-serif,system-ui,sans-serif; }
-    input:focus { outline:none; border-color:var(--gold); }
+    input, select, textarea { width:100%; padding:12px 14px; background:#0c0e0a; border:1px solid var(--line); color:var(--ink); font-size:15px; font-family:ui-sans-serif,system-ui,sans-serif; }
+    textarea { min-height:88px; font-family:ui-monospace,Menlo,monospace; font-size:12px; }
+    input:focus, select:focus, textarea:focus { outline:none; border-color:var(--gold); }
     .btn { display:inline-block; width:100%; text-align:center; text-decoration:none; font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:12px; padding:14px 18px; border:1px solid var(--gold); color:var(--bg); background:var(--gold); margin-top:20px; cursor:pointer; }
     .btn.ghost { background:transparent; color:var(--gold2); margin-top:10px; }
-    .btn:disabled { opacity:.5; cursor:not-allowed; }
     .msg { font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px; margin-top:14px; min-height:1.2em; }
     .msg.err { color:var(--bad); }
     .msg.ok { color:var(--ok); }
-    .tabs { display:flex; gap:0; margin-bottom:8px; font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
-    .tabs button { flex:1; background:transparent; border:none; border-bottom:2px solid var(--line); color:var(--muted); padding:12px; cursor:pointer; }
-    .tabs button.active { color:var(--gold2); border-bottom-color:var(--gold); }
     footer { margin-top:auto; padding:28px 0 40px; border-top:1px solid var(--line); color:var(--muted); font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; text-align:center; }
-    .fine { font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; color:var(--muted); margin-top:18px; text-align:center; }
+    .fine { font-family:ui-sans-serif,system-ui,sans-serif; font-size:12px; color:var(--muted); margin-top:18px; line-height:1.5; }
+    ol { color:var(--muted); padding-left:18px; }
+    ol li { margin:6px 0; }
+    code { font-family:ui-monospace,Menlo,monospace; color:var(--gold2); font-size:12px; }
   </style>
 </head>
 <body>
@@ -41,82 +41,78 @@
     <span><a href="/" style="text-decoration:none;color:inherit">SOVEREIGN <b>/</b> QUANT</a></span>
     <nav>
       <a href="/">Home</a>
-      <span data-auth-slot></span>
+      <a href="/packages.html">Packages</a>
     </nav>
   </header>
 
   <main class="wrap" style="padding:48px 0 32px">
-    <div class="kicker">Account</div>
-    <h1>Sign in</h1>
-    <p class="lede">Manage licences, download the workstation, and (soon) link your platforms.</p>
+    <div class="kicker">After Stripe</div>
+    <h1>Collect the licence</h1>
+    <p class="lede">Pay first on Stripe. Then type the name on the receipt. This page gives you the key and the workstation zip. There is no email and no account password.</p>
 
     <div class="panel">
-      <div class="tabs">
-        <button type="button" class="active" data-tab="in">Sign in</button>
-        <button type="button" data-tab="up">Create account</button>
-      </div>
+      <form id="licence-form" autocomplete="on">
+        <label for="name">Name on the Stripe receipt</label>
+        <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Citizen" />
 
-      <form id="auth-form" autocomplete="on">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required placeholder="you@firm.com" />
+        <label for="tier">What you paid for</label>
+        <select id="tier" name="tier">
+          <option value="professional">Professional — US$499 / year</option>
+          <option value="institutional">Institutional — US$1,999 / year</option>
+        </select>
 
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" required minlength="8" placeholder="••••••••" />
-
-        <button class="btn" type="submit" id="submit">Sign in</button>
+        <button class="btn" type="submit" id="submit">Download the key</button>
         <div class="msg" id="msg"></div>
+        <label for="key" id="key-label" hidden>Your key · valid 365 days</label>
+        <textarea id="key" hidden readonly></textarea>
+        <a class="btn ghost" id="zip" href="/workstation/sovereign-quant-workstation.zip">Download the workstation zip</a>
       </form>
     </div>
 
-    <p class="fine">After purchase you will receive an activation email. Sign in here to claim your licence.</p>
+    <div class="fine">
+      <ol>
+        <li>Unzip the file on your computer.</li>
+        <li>From that folder, run <code>python scripts/activate_licence.py --key</code> and paste the key.</li>
+        <li>Professional unlocks three strategies and a US$1,000,000 software ceiling. Institutional unlocks ten, Monte Carlo, and US$50,000,000.</li>
+      </ol>
+      Keep the Stripe receipt. Books and CSV reports are not this key. Those still follow <a href="/after.html">after you pay</a>.
+    </div>
   </main>
 
   <footer class="wrap">
     © 2026 Sovereign Quant · Australia · research reports only
   </footer>
 
-  <script src="/auth.js"></script>
+  <script src="/licence.js"></script>
   <script>
     (function () {
-      const form = document.getElementById("auth-form");
+      const form = document.getElementById("licence-form");
       const msg = document.getElementById("msg");
-      const submit = document.getElementById("submit");
-      let mode = "in";
+      const keyBox = document.getElementById("key");
+      const keyLabel = document.getElementById("key-label");
+      const params = new URLSearchParams(location.search);
+      if (params.get("tier") === "institutional") form.tier.value = "institutional";
 
-      document.querySelectorAll("[data-tab]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          mode = btn.dataset.tab;
-          document.querySelectorAll("[data-tab]").forEach(b => b.classList.toggle("active", b === btn));
-          submit.textContent = mode === "in" ? "Sign in" : "Create account";
-          msg.textContent = "";
-        });
-      });
-
-      form.addEventListener("submit", async (e) => {
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
         msg.textContent = "";
         msg.className = "msg";
-        submit.disabled = true;
-        const email = form.email.value.trim();
-        const password = form.password.value;
-
-        const result = mode === "in"
-          ? await window.SQAuth.signIn(email, password)
-          : await window.SQAuth.signUp(email, password);
-
-        submit.disabled = false;
-
-        if (result?.error) {
+        try {
+          const issued = await window.SQLicence.issue(form.name.value, form.tier.value);
+          keyBox.hidden = false;
+          keyLabel.hidden = false;
+          keyBox.value = issued.key;
+          const blob = new Blob([issued.key + "\n"], { type: "text/plain" });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "sovereign-quant-licence.txt";
+          a.click();
+          URL.revokeObjectURL(a.href);
+          msg.className = "msg ok";
+          msg.textContent = issued.tier + " key saved. It expires " + issued.expires + ". Now download the zip.";
+        } catch (err) {
           msg.className = "msg err";
-          msg.textContent = result.error.message;
-          return;
-        }
-
-        msg.className = "msg ok";
-        msg.textContent = mode === "in" ? "Signed in. Redirecting…" : "Account created. Check your email to confirm.";
-        if (mode === "in") {
-          const next = new URLSearchParams(location.search).get("next") || "/dashboard.html";
-          setTimeout(() => location.href = next, 600);
+          msg.textContent = err.message || "Could not build the key.";
         }
       });
     })();

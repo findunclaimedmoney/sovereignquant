@@ -15,5 +15,6 @@ Same as one unit of the pack.
 ## A$29 PDF
 Attach on Stripe or email Vol. I.
 
-## US$499 Professional
-Generate a named key with the private signing tool. Never commit the secret.
+## US$499 Professional and US$1,999 Institutional
+The buyer opens https://sovereignquant.com.au/login.html after Stripe, types the name on the receipt, and downloads the key plus the workstation zip. The key is valid for 365 days. They activate on their own machine with `python scripts/activate_licence.py --key <KEY>`. Do not email a second key unless that page is down.
+
